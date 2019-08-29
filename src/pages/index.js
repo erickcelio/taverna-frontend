@@ -5,7 +5,7 @@ import Login from './login'
 import { Provider } from 'react-redux'
 import store from '../store'
 
-function App () {
+const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={{ mode: 'dark' }}>
