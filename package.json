@@ -45,7 +45,9 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "eslint-plugin-standard": "^4.0.1",
+    "prop-types": "^15.7.2",
     "react-redux": "^7.1.1",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-devtools": "^3.5.0"
   }
 }
