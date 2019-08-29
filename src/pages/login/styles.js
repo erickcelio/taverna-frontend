@@ -1,15 +1,16 @@
-import styled, {keyframes} from "styled-components";
-import {styles} from "../../assets/styles";
-import {lighten} from 'polished';
+/* eslint-disable no-unused-vars */
+import styled, { keyframes } from 'styled-components'
+import { styles } from '../../assets/styles'
+import { lighten } from 'polished'
 
 const {
-  colors : {
-    orange,
+  colors: {
+    orange
 
   },
   theme: {
     textColor,
-    backgroundColor,
+    backgroundColor
   }
 } = styles
 
@@ -21,7 +22,7 @@ const buttonKF = keyframes`
   100% {
     transform: translateX(5px);
   }
-`;
+`
 /* ------ Css ------ */
 
 const FormBox = styled.form`
@@ -33,36 +34,36 @@ const FormBox = styled.form`
   background: rgb(0, 0, 15, 0.5);
   box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
   padding: 2%;
-`;
+`
 
 const FormDiv = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 0 auto;
-`;
+`
 
 const Header = styled.div`
   margin: 2% auto 10% auto;
   text-align: center;
-`;
+`
 const HeaderH2 = styled.h2`
   font-size: 250%;
   color: ${textColor};
-`;
+`
 const HeaderP = styled.p`
   letter-spacing: 0.05em;
   color: #aaa;
-`;
+`
 const SpanIcon = styled.span`
   background: #fff;
   color: #333;
   padding: 15px 0px 15.5px 9px;
   border-radius: 5px 0px 0px 5px;
-`;
+`
 const Div = styled.div`
   display: block;
-`;
+`
 const Input = styled.input`
   width: 240px;
   margin-top: 2%;
@@ -77,7 +78,7 @@ const Input = styled.input`
     transform: translateX(-2px);
     border-radius: 5px;
   }
-`;
+`
 const Button = styled.button`
   display: inline-block;
   color: #fff;
@@ -116,7 +117,7 @@ const Button = styled.button`
       box-shadow: none;
       animation: ${buttonKF} 0.4s ease-in-out infinite alternate;
     }
-`;
+`
 
 export {
   FormBox,
@@ -127,5 +128,5 @@ export {
   SpanIcon,
   Input,
   Div,
-  Button,
-};
+  Button
+}

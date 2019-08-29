@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import background from '../assets/img/background.jpg'
-const Container = styled.div `
+
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +9,6 @@ const Container = styled.div `
   background-image: url(${background});
   color:  #44475A;
   height: 100vh
-`;
+`
 
-export {Container};
-
+export { Container }
