@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import {
   FormBox,
@@ -13,7 +12,7 @@ import {
 } from './styles'
 import { FaUnlock, FaUserAlt } from 'react-icons/fa'
 
-export default function Login () {
+export default function LoginPage () {
   return (
     <FormBox >
       <FormDiv>

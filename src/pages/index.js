@@ -1,20 +1,5 @@
-import React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { Container } from './styles'
-import Login from './login'
-import { Provider } from 'react-redux'
-import store from '../store'
+import LoginPage from './login'
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <ThemeProvider theme={{ mode: 'dark' }}>
-        <Container>
-          <Login />
-        </Container>
-      </ThemeProvider>
-    </Provider>
-  )
+export {
+  LoginPage
 }
-
-export default App

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import background from '../assets/img/background.jpg'
+import background from '../img/background.jpg'
 
 const Container = styled.div`
   display: flex;
@@ -11,4 +11,6 @@ const Container = styled.div`
   height: 100vh
 `
 
-export { Container }
+export default {
+  Container
+}
