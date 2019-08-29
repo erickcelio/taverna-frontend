@@ -5,7 +5,7 @@ export default {
   purpleSecondary: '#a05195',
   pink: '#d45087',
   salmon: '#f95d6a',
-  orange: '#ff7c43',
+  orange: '#ff7c43'
 }
 
 /* colors:

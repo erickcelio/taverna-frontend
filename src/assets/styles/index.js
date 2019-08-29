@@ -5,5 +5,5 @@ import theme from './theme'
 export const styles = {
   colors,
   fonts,
-  theme,
+  theme
 }

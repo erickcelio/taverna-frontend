@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React from 'react'
 import {
   FormBox,
   FormDiv,
@@ -8,11 +9,11 @@ import {
   SpanIcon,
   Input,
   Div,
-  Button,
-} from './styles';
-import { FaUnlock, FaUserAlt } from 'react-icons/fa';
+  Button
+} from './styles'
+import { FaUnlock, FaUserAlt } from 'react-icons/fa'
 
-export default function Login() {
+export default function Login () {
   return (
     <FormBox >
       <FormDiv>
@@ -24,14 +25,14 @@ export default function Login() {
           <SpanIcon><FaUnlock /></SpanIcon>
           <Input type="text" placeholder="@UserName" required />
         </Div>
-          <Div>
-            <SpanIcon><FaUserAlt /></SpanIcon>
-            <Input  type="password" placeholder="Password" required />
-          </Div>
-          <Button>Log in</Button>
-          <Button pass >Forgot Password</Button>
-          <Button submits >Log up</Button>
+        <Div>
+          <SpanIcon><FaUserAlt /></SpanIcon>
+          <Input type="password" placeholder="Password" required />
+        </Div>
+        <Button>Log in</Button>
+        <Button pass >Forgot Password</Button>
+        <Button submits >Log up</Button>
       </FormDiv>
     </FormBox>
-  );
+  )
 }
