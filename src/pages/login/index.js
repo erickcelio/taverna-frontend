@@ -58,9 +58,9 @@ const LoginForm = props => {
             value={values.password}
           />
         </div>
-        <Button type="submit">Log in</Button>
-        <Button pass>Forgot Password</Button>
-        <Button submits>Log up</Button>
+        <Button type="submit"><FormattedMessage id={'login.buttonLogin'} /></Button>
+        <Button pass><FormattedMessage id={'login.buttonForgotPassword'} /></Button>
+        <Button submits><FormattedMessage id={'login.buttonLogup'} /></Button>
       </FormDiv>
     </FormBox>
   )

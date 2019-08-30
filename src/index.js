@@ -6,7 +6,7 @@ import messagesPt from './translations/pt-br'
 import messagesEn from './translations/en-us'
 
 const messages = {
-  'pt-br': messagesPt,
+  'pt-BR': messagesPt,
   'en-US': messagesEn
 }
 

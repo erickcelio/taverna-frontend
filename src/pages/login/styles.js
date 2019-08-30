@@ -40,6 +40,8 @@ const FormDiv = styled.div`
 `
 
 const Header = styled.div`
+  display: block;
+  width: 450px;
   margin: 2% auto 10% auto;
   text-align: center;
 `
@@ -54,7 +56,7 @@ const HeaderP = styled.p`
 const SpanIcon = styled.span`
   background: #fff;
   color: #333;
-  padding: 15px 0px 15.5px 9px;
+  padding: 15px 2px 15.5px 9px;
   border-radius: 5px 0px 0px 5px;
 `
 const Div = styled.div`
@@ -72,7 +74,6 @@ const Input = styled.input`
   transition: 0.2s linear;
   &:focus{
     transform: translateX(-2px);
-    border-radius: 5px;
   }
 `
 const Button = styled.button`
