@@ -16,6 +16,7 @@ import {
   Input,
   Button
 } from './styles'
+import { FormattedMessage } from 'react-intl'
 
 const LoginForm = props => {
   const { values, errors, handleChange, handleBlur, handleSubmit } = props
@@ -25,7 +26,9 @@ const LoginForm = props => {
       <FormDiv>
         <Header>
           <HeaderH2>ESH</HeaderH2>
-          <HeaderP>Seu canal de comunicação empresarial.</HeaderP>
+          <HeaderP>
+            <FormattedMessage id={'login.subtitle'} />
+          </HeaderP>
         </Header>
         <div>
           <SpanIcon>

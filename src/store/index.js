@@ -1,10 +1,8 @@
 import auth from './ducks/auth'
 import { combineReducers, createStore } from 'redux'
-import { reducer as form } from 'redux-form'
 
 const reducers = combineReducers({
-  auth,
-  form
+  auth
 })
 
 export default createStore(
