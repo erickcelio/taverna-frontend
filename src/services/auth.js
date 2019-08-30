@@ -1,7 +1,19 @@
-import axios from 'axios'
+import api from './api'
 
-const api = axios.create({
-  baseURL: 'http://localhost:3333/login/register'
-})
+export const TOKEN_KEY = 'eshToken'
 
-export default api
+export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null
+
+export const getToken = () => localStorage.getItem(TOKEN_KEY)
+
+export const loginService = async ({ email, password }) => {
+  const { data } = await api.post('/login', { email, password })
+  const { user, token } = data
+  console.log(user, token)
+  localStorage.setItem(TOKEN_KEY, token)
+  return data
+}
+
+export const logoutService = () => {
+  localStorage.removeItem(TOKEN_KEY)
+}

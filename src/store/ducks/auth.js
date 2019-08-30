@@ -13,12 +13,13 @@ const initialState = {
 
 // Actions
 export const actions = {
-  login: (username, password) => {
+  login: ({ user, token }) => {
     return {
       type: Types.LOGIN,
       payload: {
-        username,
-        password
+        user,
+        token,
+        isLogged: true
       }
     }
   },
@@ -33,7 +34,7 @@ export const actions = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case Types.LOGIN: {
-      return state
+      return action.payload
     }
     case Types.LOGOUT: {
       return initialState
