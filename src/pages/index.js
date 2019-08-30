@@ -1,17 +1,7 @@
-/* eslint-disable no-unused-vars */
-import React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { Container } from './styles'
-import Login from './login'
+import LoginPage from './login'
+import SignUpPage from './signup'
 
-function App () {
-  return (
-    <ThemeProvider theme={{ mode: 'dark' }}>
-      <Container>
-        <Login />
-      </Container>
-    </ThemeProvider>
-  )
+export {
+  LoginPage,
+  SignUpPage
 }
-
-export default App

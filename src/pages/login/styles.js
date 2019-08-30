@@ -1,16 +1,12 @@
-/* eslint-disable no-unused-vars */
 import styled, { keyframes } from 'styled-components'
-import { styles } from '../../assets/styles'
-import { lighten } from 'polished'
+import styles from '../../assets/styles'
 
 const {
   colors: {
     orange
-
   },
   theme: {
-    textColor,
-    backgroundColor
+    textColor
   }
 } = styles
 
