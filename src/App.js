@@ -1,9 +1,9 @@
-import React from 'react'
-import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
-import styles from './assets/styles'
-import store from './store'
+import React from 'react'
 import Routes from './routes'
+import { ThemeProvider } from 'styled-components'
+import store from './store'
+import styles from './assets/styles'
 
 const { styles: { Container } } = styles
 

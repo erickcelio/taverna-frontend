@@ -1,5 +1,5 @@
-import styled, { keyframes } from 'styled-components'
 import styles from '../../assets/styles'
+import styled, { keyframes } from 'styled-components'
 
 const {
   colors: {
