@@ -1,0 +1,18 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - npm install
+
+heroku_deploy:
+  stage: deploy
+  script:
+    - apt update -qq
+    - apt install -qq -y ruby
+    - gem install -q dpl
+    - dpl --provider=heroku --app=$APP_NAME --api-key=$AUTH_TOKEN
+  only:
+    - master
