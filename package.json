@@ -24,12 +24,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src"
+    "lint:js": "eslint src",
+    "lint:css": "stylelint './src/**/*.js'"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm run lint"
+      "pre-commit": "npm run lint:js && npm run lint:css",
+      "pre-push": "npm run lint:js && npm run lint:css"
     }
   },
   "eslintConfig": {
@@ -48,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.2.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-standard": "^14.1.0",
@@ -64,6 +66,10 @@
     "prop-types": "^15.7.2",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
-    "redux-devtools": "^3.5.0"
+    "redux-devtools": "^3.5.0",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0"
   }
 }

@@ -1,5 +1,5 @@
-import React from 'react'
 import PrivateRoute from './privateRoute'
+import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { SignInPage, SignUpPage } from '../pages'

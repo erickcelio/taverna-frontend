@@ -13,6 +13,7 @@ import {
   HeaderH2,
   HeaderP,
   Input,
+  InputContainer,
   SpanIcon
 } from './styles'
 import { FaUnlock, FaUserAlt } from 'react-icons/fa'
@@ -38,42 +39,46 @@ const SignInForm = props => {
           </HeaderP>
         </Header>
         <div>
-          <SpanIcon>
-            <FaUserAlt />
-          </SpanIcon>
-          <Input
-            type="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-            placeholder={formatMessage({ id: 'login.input.email' })}
-            required
-          />
-        </div>
-        <div>
-          <SpanIcon>
-            <FaUnlock />
-          </SpanIcon>
-          <Input
-            placeholder={formatMessage({ id: 'login.input.password' })}
-            required
-            type="password"
-            name="password"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-          />
+          <InputContainer>
+            <SpanIcon>
+              <FaUserAlt />
+            </SpanIcon>
+            <Input
+              type="email"
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              placeholder={formatMessage({ id: 'login.input.email' })}
+              required
+            />
+          </InputContainer>
+          <InputContainer>
+            <SpanIcon>
+              <FaUnlock />
+            </SpanIcon>
+            <Input
+              placeholder={formatMessage({ id: 'login.input.password' })}
+              required
+              type="password"
+              name="password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+            />
+          </InputContainer>
         </div>
         <Button type="submit">
           <FormattedMessage id={'login.button.login'} />
         </Button>
-        <Button pass>
-          <FormattedMessage id={'login.button.forgot-password'} />
-        </Button>
-        <Button onClick={() => history.push('/register')} submits>
-          <FormattedMessage id={'login.button.signup'} />
-        </Button>
+        <div>
+          <Button pass>
+            <FormattedMessage id={'login.button.forgot-password'} />
+          </Button>
+          <Button onClick={() => history.push('/register')} submits>
+            <FormattedMessage id={'login.button.sign-up'} />
+          </Button>
+        </div>
       </FormDiv>
     </FormBox>
   )

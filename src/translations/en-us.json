@@ -1,8 +1,8 @@
 {
   "login.subtitle": "Your business communication channel",
-  "login.input.email": "user name",
-  "login.input.password": "PassWord",
+  "login.input.email": "Username",
+  "login.input.password": "Password",
   "login.button.login": "Login",
-  "login.button.signup": "Logup",
+  "login.button.sign-up": "SignUp",
   "login.button.forgot-password": "Forgot password?"
 }
