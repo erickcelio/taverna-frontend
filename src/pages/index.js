@@ -1,7 +1,7 @@
-import LoginPage from './login'
-import SignUpPage from './signup'
+import SignInPage from './signIn'
+import SignUpPage from './signUp'
 
 export {
-  LoginPage,
+  SignInPage,
   SignUpPage
 }

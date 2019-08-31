@@ -2,13 +2,14 @@ import React from 'react'
 import PrivateRoute from './privateRoute'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import { LoginPage } from '../pages'
+import { SignInPage, SignUpPage } from '../pages'
 
 const Routes = () => (
   <BrowserRouter>
     <Switch>
       <PrivateRoute path="/app" component={() => <h1>App</h1>} />
-      <Route exact path="/" component={LoginPage} />
+      <Route exact path="/" component={ SignInPage} />
+      <Route exact path="/register" component={ SignUpPage} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>
