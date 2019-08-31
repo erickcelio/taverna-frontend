@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import styles from './assets/styles'
 import store from './store'
 import Routes from './routes'
-import { IntlProvider } from 'react-intl'
 
 const { styles: { Container } } = styles
 
