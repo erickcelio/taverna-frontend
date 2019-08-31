@@ -44,6 +44,12 @@
       "react/no-unknown-property": "error",
       "react/no-unused-prop-types": "error",
       "react/prop-types": "error",
-      "react/react-in-jsx-scope": "error"
+      "react/react-in-jsx-scope": "error",
+      "sort-imports": ["error", {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "single", "multiple", "all"]
+      }]
     }
 }

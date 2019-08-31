@@ -1,5 +1,4 @@
 import SignInPage from './signIn'
+import SignUpPage from './signup'
 
-export {
-  SignInPage
-}
+export { SignInPage, SignUpPage }
