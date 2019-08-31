@@ -1,5 +1,5 @@
-import styled, { keyframes } from 'styled-components'
 import styles from '../../assets/styles'
+import styled, { keyframes } from 'styled-components'
 
 const {
   colors: {
@@ -22,14 +22,15 @@ const buttonKF = keyframes`
 /* ------ Css ------ */
 
 const FormBox = styled.form`
+  display: flex;
   width: 450px;
   min-height: 500px;
   height: auto;
   border-radius: 10px;
-  margin: 2% auto;
+  margin: 8px auto;
   background: rgb(0, 0, 15, 0.5);
-  box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
-  padding: 2%;
+  box-shadow: 0 0 10px 2px rgba(0,0,0,0.3);
+  padding: 16px;
 `
 
 const FormDiv = styled.div`
@@ -37,12 +38,23 @@ const FormDiv = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 0 auto;
+  
+  div {
+    width: 100%;
+  }
+`
+
+const InputContainer = styled.div`
+margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 `
 
 const Header = styled.div`
   display: block;
   width: 450px;
-  margin: 2% auto 10% auto;
+  margin: 16px auto 32px 0;
   text-align: center;
 `
 const HeaderH2 = styled.h2`
@@ -53,18 +65,19 @@ const HeaderP = styled.p`
   letter-spacing: 0.05em;
   color: #aaa;
 `
+
 const SpanIcon = styled.span`
+  padding: 8px;
   background: #fff;
   color: #333;
-  padding: 15px 2px 15.5px 9px;
-  border-radius: 5px 0px 0px 5px;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
-const Div = styled.div`
-  display: block;
-`
+
 const Input = styled.input`
   width: 240px;
-  margin-top: 2%;
   padding: 15px;
   font-size: 16px;
   color: #5E6472;
@@ -76,6 +89,7 @@ const Input = styled.input`
     transform: translateX(-2px);
   }
 `
+
 const Button = styled.button`
   display: inline-block;
   color: #fff;
@@ -110,7 +124,7 @@ const Button = styled.button`
     color: #fff;
   `}
   &:hover {
-      transform: translatey(3px);
+      transform: translatey(8px);
       box-shadow: none;
       animation: ${buttonKF} 0.4s ease-in-out infinite alternate;
     }
@@ -124,6 +138,6 @@ export {
   HeaderP,
   SpanIcon,
   Input,
-  Div,
-  Button
+  Button,
+  InputContainer
 }

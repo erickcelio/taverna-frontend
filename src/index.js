@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
 import App from './App'
 import { IntlProvider } from 'react-intl'
-import messagesPt from './translations/pt-br'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import messagesEn from './translations/en-us'
+import messagesPt from './translations/pt-br'
 
 const messages = {
   'pt-BR': messagesPt,

@@ -49,7 +49,7 @@
         "ignoreCase": false,
         "ignoreDeclarationSort": false,
         "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "single", "multiple", "all"]
+        "memberSyntaxSortOrder": ["single", "multiple", "none", "all"]
       }]
     }
 }

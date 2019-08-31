@@ -1,7 +1,7 @@
 import colors from './colors'
 import fonts from './fonts'
-import theme from './theme'
 import styles from './styles'
+import theme from './theme'
 
 export default {
   colors,
