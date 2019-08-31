@@ -18,7 +18,7 @@ import {
 } from './styles'
 import { FormattedMessage, injectIntl } from 'react-intl'
 
-const LoginForm = props => {
+const SignInForm = props => {
   const { values, /* errors, */ handleChange, handleBlur, handleSubmit, intl: { formatMessage } } = props
 
   return (
@@ -66,7 +66,7 @@ const LoginForm = props => {
   )
 }
 
-LoginForm.propTypes = {
+SignInForm.propTypes = {
   values: PropTypes.object,
   /* errors: PropTypes.object, */
   intl: PropTypes.object,
@@ -75,7 +75,7 @@ LoginForm.propTypes = {
   handleSubmit: PropTypes.func
 }
 
-const LoginPageWithFormik = withFormik({
+const SignInPageWithFormik = withFormik({
   mapPropsToValues: () => ({ email: '', password: '' }),
   validate: values => {
     const errors = {}
@@ -98,7 +98,7 @@ const LoginPageWithFormik = withFormik({
       console.log('==>', e)
     }
   }
-})(LoginForm)
+})(SignInForm)
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -111,4 +111,4 @@ const mapDispatchToProps = dispatch =>
 export default injectIntl(connect(
   null,
   mapDispatchToProps
-)(LoginPageWithFormik))
+)(SignInPageWithFormik))
