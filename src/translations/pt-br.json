@@ -1,8 +1,8 @@
 {
-  "login.subtitle" : "Seu canal de comunicação empresarial",
-  "login.inputEmail" : "Usuário",
-  "login.inputPassword" : "Senha",
-  "login.buttonLogin": "Entrar",
-  "login.buttonLogup": "Registrar",
-  "login.buttonForgotPassword": "Esqueceu a senha?"
+  "login.subtitle": "Seu canal de comunicação empresarial",
+  "login.input.email": "Usuário",
+  "login.input.password": "Senha",
+  "login.button.login": "Entrar",
+  "login.button.signup": "Registrar",
+  "login.button.forgot-password": "Esqueceu a senha?"
 }

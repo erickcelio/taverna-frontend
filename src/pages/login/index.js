@@ -16,16 +16,16 @@ import {
   Input,
   Button
 } from './styles'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl } from 'react-intl'
 
 const LoginForm = props => {
-  const { values, errors, handleChange, handleBlur, handleSubmit } = props
+  const { values, /* errors, */ handleChange, handleBlur, handleSubmit, intl: { formatMessage } } = props
 
   return (
     <FormBox onSubmit={handleSubmit}>
       <FormDiv>
         <Header>
-          <HeaderH2>ESH</HeaderH2>
+          <HeaderH2>Taverna</HeaderH2>
           <HeaderP>
             <FormattedMessage id={'login.subtitle'} />
           </HeaderP>
@@ -40,7 +40,7 @@ const LoginForm = props => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
-            placeholder="E-mail"
+            placeholder={formatMessage({ id: 'login.input.email' })}
             required
           />
         </div>
@@ -49,7 +49,7 @@ const LoginForm = props => {
             <FaUnlock />
           </SpanIcon>
           <Input
-            placeholder="Password"
+            placeholder={formatMessage({ id: 'login.input.password' })}
             required
             type="password"
             name="password"
@@ -58,9 +58,9 @@ const LoginForm = props => {
             value={values.password}
           />
         </div>
-        <Button type="submit"><FormattedMessage id={'login.buttonLogin'} /></Button>
-        <Button pass><FormattedMessage id={'login.buttonForgotPassword'} /></Button>
-        <Button submits><FormattedMessage id={'login.buttonLogup'} /></Button>
+        <Button type="submit"><FormattedMessage id={'login.button.login'} /></Button>
+        <Button pass><FormattedMessage id={'login.button.forgot-password'} /></Button>
+        <Button submits><FormattedMessage id={'login.button.signup'} /></Button>
       </FormDiv>
     </FormBox>
   )
@@ -68,7 +68,8 @@ const LoginForm = props => {
 
 LoginForm.propTypes = {
   values: PropTypes.object,
-  errors: PropTypes.object,
+  /* errors: PropTypes.object, */
+  intl: PropTypes.object,
   handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
   handleSubmit: PropTypes.func
@@ -94,7 +95,7 @@ const LoginPageWithFormik = withFormik({
     try {
       props.login(await loginService(values))
     } catch (e) {
-      console.log(e)
+      console.log('==>', e)
     }
   }
 })(LoginForm)
@@ -107,7 +108,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-export default connect(
+export default injectIntl(connect(
   null,
   mapDispatchToProps
-)(LoginPageWithFormik)
+)(LoginPageWithFormik))
