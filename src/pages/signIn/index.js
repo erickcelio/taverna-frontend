@@ -49,7 +49,7 @@ const SignInForm = props => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
-              placeholder={formatMessage({ id: 'login.input.email' })}
+              placeholder={formatMessage({ id: 'login.input.username' })}
               required
             />
           </InputContainer>

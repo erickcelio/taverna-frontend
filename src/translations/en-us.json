@@ -1,8 +1,22 @@
 {
   "login.subtitle": "Your business communication channel",
-  "login.input.email": "Username",
+  "login.input.username": "Username",
   "login.input.password": "Password",
   "login.button.login": "Login",
   "login.button.sign-up": "SignUp",
-  "login.button.forgot-password": "Forgot password?"
+  "login.button.forgot-password": "Forgot password?",
+
+  "register.input.name": "Name",
+  "register.input.username": "Username",
+  "register.input.email": "E-mail",
+  "register.input.password": "Password",
+  "register.input.repeat-password": "Repeat your password",
+  "register.button.register": "SignUp",
+  "register.button.login": "Already is member ? Do Login",
+
+  "input.error.required": "This input is required",
+  "input.error.invalid-password-confirmation": "Password not are the same",
+  "input.error.invalid-email-address": "E-mail invalid",
+  "input.error.email-already-exists": "This E-mail is already in use",
+  "input.error.username-already-exists": "This username is already in use"
 }

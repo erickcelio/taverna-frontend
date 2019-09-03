@@ -21,6 +21,10 @@ const buttonKF = keyframes`
 `
 /* ------ Css ------ */
 
+const ErrorText = styled.span`
+  color: red;
+`
+
 const FormBox = styled.form`
   display: flex;
   width: 450px;
@@ -38,10 +42,6 @@ const FormDiv = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 0 auto;
-  
-  div {
-    width: 100%;
-  }
 `
 
 const InputContainer = styled.div`
@@ -80,12 +80,12 @@ const Input = styled.input`
   width: 240px;
   padding: 15px;
   font-size: 16px;
-  color: #5E6472;
+  color: #5e6472;
   outline: none;
   border: none;
-  border-radius: 0px 5px 5px 0px;
+  border-radius: 0 5px 5px 0;
   transition: 0.2s linear;
-  &:focus{
+  &:focus {
     transform: translateX(-2px);
   }
 `
@@ -139,5 +139,6 @@ export {
   SpanIcon,
   Input,
   Button,
-  InputContainer
+  InputContainer,
+  ErrorText
 }

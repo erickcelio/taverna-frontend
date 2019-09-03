@@ -1,8 +1,23 @@
 {
   "login.subtitle": "Seu canal de comunicação empresarial",
-  "login.input.email": "Usuário",
+  "login.input.username": "Usuário ou E-mail",
   "login.input.password": "Senha",
   "login.button.login": "Entrar",
-  "login.button.signup": "Registrar",
-  "login.button.forgot-password": "Esqueceu a senha?"
+  "login.button.sign-up": "Registrar",
+  "login.button.forgot-password": "Esqueceu a senha?",
+
+  "register.input.name": "Nome",
+  "register.input.username": "Usuário",
+  "register.input.email": "E-mail",
+  "register.input.password": "Senha",
+  "register.input.repeat-password": "Repita sua senha",
+  "register.button.register": "Registrar",
+  "register.button.login": "Já possui conta? Faça Login",
+
+  "input.error.required": "Este campo é obrigatório",
+  "input.error.invalid-password-confirmation": "Senhas não são iguais",
+  "input.error.invalid-email-address": "E-mail inválido",
+  "input.error.email-already-exists": "Este E-mail já está em uso",
+  "input.error.username-already-exists": "Este usuário já está em uso"
+
 }

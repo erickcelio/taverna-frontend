@@ -8,7 +8,8 @@ const Container = styled.div`
   background-color: #282A36;
   background-image: url(${background});
   color:  #44475A;
-  height: 100vh
+  overflow-y: auto;
+  height: 100vh;
 `
 
 export default {

@@ -8,9 +8,13 @@ export const getToken = () => localStorage.getItem(TOKEN_KEY)
 
 export const loginService = async ({ email, password }) => {
   const { data } = await api.post('/login', { email, password })
-  const { user, token } = data
-  console.log(user, token)
-  localStorage.setItem(TOKEN_KEY, token)
+  localStorage.setItem(TOKEN_KEY, data.token)
+  return data
+}
+
+export const registerService = async ({ name, username, email, password }) => {
+  const { data } = await api.post('/register', { name, username, email, password })
+  localStorage.setItem(TOKEN_KEY, data.token)
   return data
 }
 
