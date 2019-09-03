@@ -44,7 +44,7 @@ const SignInForm = props => {
               <FaUserAlt />
             </SpanIcon>
             <Input
-              type="email"
+              type="text"
               name="email"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -112,6 +112,7 @@ const SignInPageWithFormik = withFormik({
   handleSubmit: async (values, { props }) => {
     try {
       props.login(await loginService(values))
+      props.history.push('/app')
     } catch (e) {
       console.log('==>', e)
     }
