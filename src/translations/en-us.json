@@ -14,6 +14,10 @@
   "register.button.register": "SignUp",
   "register.button.login": "Already is member ? Do Login",
 
+  "recovery.input.email": "E-mail",
+  "recovery.button.submit": "Submit",
+  "recovery.button.login": "Password recovered? Login",
+
   "input.error.required": "This input is required",
   "input.error.invalid-password-confirmation": "Password not are the same",
   "input.error.invalid-email-address": "E-mail invalid",
