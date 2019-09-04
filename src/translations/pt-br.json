@@ -14,10 +14,13 @@
   "register.button.register": "Registrar",
   "register.button.login": "Já possui conta? Faça Login",
 
+  "recovery.input.email": "E-mail",
+  "recovery.button.submit": "Enviar",
+  "recovery.button.login": "Senha recuperada? Faça Login",
+
   "input.error.required": "Este campo é obrigatório",
   "input.error.invalid-password-confirmation": "Senhas não são iguais",
   "input.error.invalid-email-address": "E-mail inválido",
   "input.error.email-already-exists": "Este E-mail já está em uso",
   "input.error.username-already-exists": "Este usuário já está em uso"
-
 }

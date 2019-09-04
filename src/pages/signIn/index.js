@@ -72,7 +72,7 @@ const SignInForm = props => {
           <FormattedMessage id={'login.button.login'} />
         </Button>
         <div>
-          <Button pass>
+          <Button onClick={() => history.push('/recovery')} pass>
             <FormattedMessage id={'login.button.forgot-password'} />
           </Button>
           <Button onClick={() => history.push('/register')} submits>
