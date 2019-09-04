@@ -31,12 +31,7 @@
     "lint:js": "eslint src",
     "lint:css": "stylelint './src/**/*.js'"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:js && npm run lint:css",
-      "pre-push": "npm run lint:js && npm run lint:css"
-    }
-  },
+  "husky": {},
   "eslintConfig": {
     "extends": "react-app"
   },

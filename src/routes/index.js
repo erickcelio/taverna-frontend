@@ -2,12 +2,12 @@ import PrivateRoute from './privateRoute'
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { RecoveryPage, SignInPage, SignUpPage } from '../pages'
+import { MainPage, RecoveryPage, SignInPage, SignUpPage } from '../pages'
 
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <PrivateRoute path="/app" component={() => <h1>App</h1>} />
+      <PrivateRoute path="/app" component={MainPage} />
       <Route exact path="/" component={SignInPage} />
       <Route exact path="/register" component={SignUpPage} />
       <Route exact path="/recovery" component={RecoveryPage} />
