@@ -80,7 +80,7 @@ const SignInForm = props => {
           message={'login.button.login'}
         />
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Button pass>
+          <Button onClick={() => history.push('/recovery')} pass>
             <FormattedMessage id={'login.button.forgot-password'} />
           </Button>
           <ButtonComponent
