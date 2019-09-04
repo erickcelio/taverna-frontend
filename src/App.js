@@ -1,10 +1,10 @@
+import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 import React from 'react'
 import Routes from './routes'
 import { ThemeProvider } from 'styled-components'
-import { store, persistor } from './store'
 import styles from './assets/styles'
-import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from './store'
 
 const { styles: { Container } } = styles
 
