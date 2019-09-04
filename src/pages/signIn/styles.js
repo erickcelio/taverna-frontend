@@ -1,5 +1,5 @@
+import styled from 'styled-components'
 import styles from '../../assets/styles'
-import styled, { keyframes } from 'styled-components'
 
 const {
   colors: {
@@ -9,17 +9,6 @@ const {
     textColor
   }
 } = styles
-
-/* --------- Animations --------- */
-const buttonKF = keyframes`
-  0% {
-    transform: translateX(1px);
-  }
-  100% {
-    transform: translateX(5px);
-  }
-`
-/* ------ Css ------ */
 
 const ErrorText = styled.span`
   color: red;
@@ -123,11 +112,6 @@ const Button = styled.button`
     background: transparent;
     color: #fff;
   `}
-  &:hover {
-      transform: translatey(8px);
-      box-shadow: none;
-      animation: ${buttonKF} 0.4s ease-in-out infinite alternate;
-    }
 `
 
 export {
