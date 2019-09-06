@@ -8,7 +8,6 @@ import { Redirect, Route } from 'react-router-dom'
 
 const Container = styled.div`
   margin-left: 65px;
-  background-color: #473D78;
   width: 100%;
   height: 100%;
 `

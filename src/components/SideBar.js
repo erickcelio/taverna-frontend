@@ -14,12 +14,12 @@ const Container = styled.div`
   flex: 1;
   height: 100%;
   display: flex;
-  min-width: 65px;
   position: fixed;
+  min-width: 65px;
+  align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  background-color: #5640a2;
+  background-color: rgba(86, 64, 162, 0.8);
 `
 
 const LogoContainer = styled.div`

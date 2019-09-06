@@ -10,7 +10,7 @@ const Container = styled.div`
 const HomePage = () => {
   return (
     <Container>
-      teste
+      Home
     </Container>
   )
 }

@@ -1,6 +1,6 @@
-import AppPage from './home'
+import HomePage from './home'
 import RecoveryPage from './recovery'
 import SignInPage from './signIn'
 import SignUpPage from './signUp'
 
-export { AppPage, RecoveryPage, SignInPage, SignUpPage }
+export { HomePage, RecoveryPage, SignInPage, SignUpPage }
