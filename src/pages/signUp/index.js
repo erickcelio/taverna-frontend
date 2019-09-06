@@ -1,3 +1,4 @@
+import ButtonComponent from '../../components/ButtonComponent'
 import { FormattedMessage } from 'react-intl'
 import InputComponent from '../../components/InputComponent'
 import PropTypes from 'prop-types'
@@ -6,6 +7,7 @@ import { actions } from '../../store/ducks/auth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { registerService } from '../../services/auth'
+import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
 
 import {
@@ -29,7 +31,8 @@ const SignUpForm = props => {
     errors,
     handleSubmit,
     history,
-    status
+    status,
+    isSubmitting
   } = props
   return (
     <FormBox onSubmit={handleSubmit} noValidate>
@@ -93,9 +96,14 @@ const SignUpForm = props => {
             icon={faUnlock}
           />
         </div>
-        <Button type="submit">
-          <FormattedMessage id={'register.button.register'} />
-        </Button>
+        <ButtonComponent
+          style={{ backgroundColor: styles.colors.purple }}
+          onClick={handleSubmit}
+          loading={isSubmitting}
+          loadingColor={'white'}
+          type="submit"
+          message={'register.button.register'}
+        />
         <Button style={{ margin: 0 }} onClick={() => history.push('/')} pass>
           <FormattedMessage id={'register.button.login'} />
         </Button>
@@ -106,6 +114,7 @@ const SignUpForm = props => {
 
 SignUpForm.propTypes = {
   values: PropTypes.object.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
   errors: PropTypes.object,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,

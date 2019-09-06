@@ -7,6 +7,8 @@ const Container = styled.div`
   align-items: center;
   background-color: #282A36;
   background-image: url(${background});
+  background-repeat: no-repeat;
+  background-size: cover;
   color:  #44475A;
   overflow-y: auto;
   height: 100vh;

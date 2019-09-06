@@ -21,7 +21,7 @@ const FormBox = styled.form`
   height: auto;
   border-radius: 10px;
   margin: 8px auto;
-  background: rgb(0, 0, 15, 0.5);
+  background: rgb(55,53,91,0.7);
   box-shadow: 0 0 10px 2px rgba(0,0,0,0.3);
   padding: 16px;
 `
