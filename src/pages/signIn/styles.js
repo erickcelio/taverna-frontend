@@ -28,6 +28,7 @@ const FormBox = styled.form`
 
 const FormDiv = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 0 auto;
