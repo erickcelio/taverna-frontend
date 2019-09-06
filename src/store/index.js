@@ -1,10 +1,12 @@
 import auth from './ducks/auth'
+import groups from './ducks/groups'
 import storage from 'redux-persist/lib/storage'
 import { combineReducers, createStore } from 'redux'
 import { persistReducer, persistStore } from 'redux-persist'
 
 const reducers = combineReducers({
-  auth
+  auth,
+  groups
 })
 
 const persistConfig = {
@@ -19,6 +21,4 @@ const store = createStore(
 )
 const persistor = persistStore(store)
 
-export {
-  store, persistor
-}
+export { store, persistor }
