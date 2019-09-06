@@ -2,12 +2,10 @@ import api from './api'
 
 export const TOKEN_KEY = 'eshToken'
 
-export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null
-
 export const getToken = () => localStorage.getItem(TOKEN_KEY)
 
-export const loginService = async ({ email, password }) => {
-  const { data } = await api.post('/login', { email, password })
+export const loginService = async ({ username, password }) => {
+  const { data } = await api.post('/login', { username, password })
   localStorage.setItem(TOKEN_KEY, data.token)
   return data
 }

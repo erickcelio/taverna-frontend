@@ -48,10 +48,10 @@ const SignInForm = props => {
             </SpanIcon>
             <Input
               type="text"
-              name="email"
+              name="username"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.email}
+              value={values.username}
               placeholder={formatMessage({ id: 'login.input.username' })}
               required
             />
@@ -105,12 +105,12 @@ SignInForm.propTypes = {
 }
 
 const SignInPageWithFormik = withFormik({
-  mapPropsToValues: () => ({ email: '', password: '' }),
+  mapPropsToValues: () => ({ username: '', password: '' }),
   validate: values => {
     const errors = {}
 
-    if (!values.email) {
-      errors.email = 'Required'
+    if (!values.username) {
+      errors.username = 'Required'
     }
 
     if (!values.password) {
