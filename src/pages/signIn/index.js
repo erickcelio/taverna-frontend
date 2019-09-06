@@ -1,4 +1,5 @@
 import ButtonComponent from '../../components/ButtonComponent'
+import { Icon } from 'antd'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { actions } from '../../store/ducks/auth'
@@ -18,7 +19,7 @@ import {
   InputContainer,
   SpanIcon
 } from './styles'
-import { FaUnlock, FaUserAlt } from 'react-icons/fa'
+/* import { FaUnlock, FaUserAlt } from 'react-icons/fa' */
 import { FormattedMessage, injectIntl } from 'react-intl'
 
 const SignInForm = props => {
@@ -44,7 +45,7 @@ const SignInForm = props => {
         <div>
           <InputContainer>
             <SpanIcon>
-              <FaUserAlt />
+              <Icon type="user" />
             </SpanIcon>
             <Input
               type="text"
@@ -58,7 +59,7 @@ const SignInForm = props => {
           </InputContainer>
           <InputContainer>
             <SpanIcon>
-              <FaUnlock />
+              <Icon type="lock" />
             </SpanIcon>
             <Input
               placeholder={formatMessage({ id: 'login.input.password' })}
@@ -72,7 +73,7 @@ const SignInForm = props => {
           </InputContainer>
         </div>
         <ButtonComponent
-          style={{ backgroundColor: styles.colors.orange }}
+          style={{ backgroundColor: styles.colors.purple }}
           onClick={handleSubmit}
           loading={isSubmitting}
           loadingColor={'white'}

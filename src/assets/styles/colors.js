@@ -1,7 +1,9 @@
 export default {
   blue: '#003f5c',
   blueSecondary: '#2f4b7c',
-  purple: '#665191',
+  purple: '#5640A2',
+  mediumPurple: '#473D78',
+  darkPurple: '#37355B',
   purpleSecondary: '#a05195',
   pink: '#d45087',
   salmon: '#f95d6a',
