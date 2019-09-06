@@ -167,7 +167,7 @@ const SignUpPageWithFormik = withFormik({
     try {
       const response = await registerService(values)
       props.login(response)
-      props.history.push('/app')
+      props.history.push('/home')
     } catch (e) {
       const error = e.response.data.error
       switch (error) {

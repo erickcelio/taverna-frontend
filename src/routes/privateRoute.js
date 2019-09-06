@@ -1,8 +1,17 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import SideBar from '../components/SideBar'
+import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Redirect, Route } from 'react-router-dom'
+
+const Container = styled.div`
+  margin-left: 65px;
+  background-color: #473D78;
+  width: 100%;
+  height: 100%;
+`
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isLogged } = useSelector(state => state.auth)
@@ -12,7 +21,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       { ...rest }
       render={props => isLogged
         ? (
-          <Component {...props}/>
+          <>
+            <SideBar {...props} />
+            <Container>
+              <Component {...props}/>
+            </Container>
+          </>
         )
         : (
           <Redirect to={{ pathname: '/', state: { from: props.location } }} />

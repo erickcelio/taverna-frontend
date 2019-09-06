@@ -123,7 +123,7 @@ const SignInPageWithFormik = withFormik({
   handleSubmit: async (values, { props }) => {
     try {
       props.login(await loginService(values))
-      props.history.push('/app')
+      props.history.push('/home')
     } catch (e) {
       console.log('==>', e)
     }

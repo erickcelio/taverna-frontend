@@ -1,3 +1,5 @@
+import 'antd/dist/antd.min.css'
+
 import App from './App'
 import { IntlProvider } from 'react-intl'
 import React from 'react'
