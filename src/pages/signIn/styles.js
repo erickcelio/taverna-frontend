@@ -34,8 +34,9 @@ const FormDiv = styled.div`
 `
 
 const InputContainer = styled.div`
-margin-top: 16px;
+  margin-top: 16px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
 `

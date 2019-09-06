@@ -1,5 +1,4 @@
 import ButtonComponent from '../../components/ButtonComponent'
-import { Icon } from 'antd'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { actions } from '../../store/ducks/auth'
@@ -8,31 +7,33 @@ import { connect } from 'react-redux'
 import { loginService } from '../../services/auth'
 import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
-import {
-  Button,
-  FormBox,
-  FormDiv,
-  Header,
-  HeaderH2,
-  HeaderP,
-  Input,
-  InputContainer,
-  SpanIcon
-} from './styles'
-/* import { FaUnlock, FaUserAlt } from 'react-icons/fa' */
+import { Button, FormBox, FormDiv, Header, HeaderH2, HeaderP } from './styles'
+import { Form, Icon, Input } from 'antd'
 import { FormattedMessage, injectIntl } from 'react-intl'
 
 const SignInForm = props => {
   const {
     values,
     handleChange,
-    handleBlur,
     handleSubmit,
     history,
     isSubmitting,
+    errors,
+    status,
     intl: { formatMessage }
   } = props
-  console.log(props)
+
+  const { username: usernameError, password: passwordError } = errors
+  const { username: usernameStatus, password: passwordStatus } = status
+  const hasUsernameError = usernameError || usernameStatus ? 'error' : ''
+  const hasPasswordError = passwordError || passwordStatus ? 'error' : ''
+  const usernameErrorMessage =
+    hasUsernameError &&
+    formatMessage({ id: `input.error.${usernameStatus || usernameError}` })
+  const passwordErrorMessage =
+    hasPasswordError &&
+    formatMessage({ id: `input.error.${passwordStatus || passwordError}` })
+
   return (
     <FormBox onSubmit={handleSubmit}>
       <FormDiv>
@@ -42,35 +43,35 @@ const SignInForm = props => {
             <FormattedMessage id={'login.subtitle'} />
           </HeaderP>
         </Header>
-        <div>
-          <InputContainer>
-            <SpanIcon>
-              <Icon type="user" />
-            </SpanIcon>
+        <div style={{ width: '280px' }}>
+          <Form.Item
+            validateStatus={hasUsernameError}
+            help={hasUsernameError && usernameErrorMessage}
+          >
             <Input
+              style={{ height: '48px' }}
+              prefix={<Icon type="user" />}
+              placeholder={formatMessage({ id: 'login.input.username' })}
               type="text"
               name="username"
               onChange={handleChange}
-              onBlur={handleBlur}
               value={values.username}
-              placeholder={formatMessage({ id: 'login.input.username' })}
-              required
             />
-          </InputContainer>
-          <InputContainer>
-            <SpanIcon>
-              <Icon type="lock" />
-            </SpanIcon>
+          </Form.Item>
+          <Form.Item
+            validateStatus={hasPasswordError}
+            help={hasPasswordError && passwordErrorMessage}
+          >
             <Input
+              style={{ height: '48px' }}
+              prefix={<Icon type="lock" />}
               placeholder={formatMessage({ id: 'login.input.password' })}
-              required
               type="password"
               name="password"
               onChange={handleChange}
-              onBlur={handleBlur}
               value={values.password}
             />
-          </InputContainer>
+          </Form.Item>
         </div>
         <ButtonComponent
           style={{ backgroundColor: styles.colors.purple }}
@@ -97,36 +98,54 @@ const SignInForm = props => {
 
 SignInForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
-  values: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired,
+  status: PropTypes.object
+}
+
+SignInForm.defaultProps = {
+  status: {}
 }
 
 const SignInPageWithFormik = withFormik({
+  validateOnBlur: false,
+  validateOnChange: false,
   mapPropsToValues: () => ({ username: '', password: '' }),
   validate: values => {
     const errors = {}
 
     if (!values.username) {
-      errors.username = 'Required'
+      errors.username = 'required'
     }
 
     if (!values.password) {
-      errors.password = 'Required'
+      errors.password = 'required'
     }
 
     return errors
   },
 
-  handleSubmit: async (values, { props }) => {
+  handleSubmit: async (values, { props, setStatus, setSubmitting }) => {
     try {
       props.login(await loginService(values))
       props.history.push('/home')
     } catch (e) {
-      console.log('==>', e)
+      const error = e.response.data.error
+      switch (error) {
+        case 'user_not_found':
+          setStatus({ username: 'invalid-username' })
+          break
+        case 'invalid_password':
+          setStatus({ password: 'invalid-password' })
+          break
+        default:
+          break
+      }
+      setSubmitting(false)
     }
   }
 })(SignInForm)

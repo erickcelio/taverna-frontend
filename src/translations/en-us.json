@@ -22,5 +22,8 @@
   "input.error.invalid-password-confirmation": "Password not are the same",
   "input.error.invalid-email-address": "E-mail invalid",
   "input.error.email-already-exists": "This E-mail is already in use",
-  "input.error.username-already-exists": "This username is already in use"
+  "input.error.username-already-exists": "This username is already in use",
+
+  "input.error.invalid-username": "User not found",
+  "input.error.invalid-password": "This password is invalid"
 }

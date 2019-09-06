@@ -1,52 +1,48 @@
 import ButtonComponent from '../../components/ButtonComponent'
-import { FormattedMessage } from 'react-intl'
-import InputComponent from '../../components/InputComponent'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { actions } from '../../store/ducks/auth'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
-import {
-  Button,
-  FormBox,
-  FormDiv,
-  Header,
-  HeaderH2
-} from './../signIn/styles'
+import { Button, FormBox, FormDiv, Header, HeaderH2 } from './../signIn/styles'
+import { Form, Icon, Input } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
 
 const SignUpForm = props => {
   const {
     values,
     handleChange,
-    handleBlur,
     errors,
     handleSubmit,
     history,
     status,
-    isSubmitting
+    isSubmitting,
+    intl: { formatMessage }
   } = props
+
+  const { email: emailError } = errors
+  const { email: emailStatus } = status
+  const hasEmailError = emailError || emailStatus ? 'error' : ''
+  const emailErrorMessage =
+    hasEmailError &&
+    formatMessage({ id: `input.error.${emailStatus || emailError}` })
+
   return (
     <FormBox onSubmit={handleSubmit} noValidate>
       <FormDiv>
         <Header>
           <HeaderH2>Taverna</HeaderH2>
         </Header>
-        <div>
-          <InputComponent
+        <Form.Item validateStatus={hasEmailError} help={emailErrorMessage}>
+          <Input
+            prefix={<Icon type="mail" />}
+            style={{ width: '280px', height: '48px' }}
             type="email"
             name="email"
             onChange={handleChange}
-            onBlur={handleBlur}
             value={values.email}
-            placeholder="recovery.input.email"
-            icon={faEnvelope}
-            error={errors.email || status.email}
-            invalid={errors.email || status.email}
+            placeholder={formatMessage({ id: 'recovery.input.email' })}
           />
-        </div>
+        </Form.Item>
         <ButtonComponent
           style={{ backgroundColor: styles.colors.purple }}
           onClick={handleSubmit}
@@ -68,7 +64,7 @@ SignUpForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   errors: PropTypes.object,
   handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
+  intl: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   status: PropTypes.object
@@ -107,15 +103,4 @@ const SignUpPageWithFormik = withFormik({
   }
 })(SignUpForm)
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      login: actions.login
-    },
-    dispatch
-  )
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUpPageWithFormik)
+export default injectIntl(SignUpPageWithFormik)
