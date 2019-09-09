@@ -1,9 +1,9 @@
-import BaseUrl from '../../../constraints/BaseUrl'
 import Colors from '../../../assets/styles/Colors'
-import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { Avatar, Icon } from 'antd'
+import { Avatar, Icon, Modal } from 'antd'
+import React, { useState } from 'react'
+import CreateGroupModal from './CreateGroupModal'
 
 const Container = styled.div`
   display: flex;
@@ -31,14 +31,15 @@ const Groups = () => {
   const groups = useSelector(state => state.groups)
   return (
     <GroupsContainer>
-      {groups.map(({ image }) => (
-        <Avatar shape="square" size={64} src={BaseUrl.imageBaseUrl + image} />
+      {groups.map(({ image, name }) => (
+        <Avatar key={name} shape="square" size={64} src={image} />
       ))}
     </GroupsContainer>
   )
 }
 
 const ListGroups = () => {
+  const [showModal, toggleModal] = useState(true)
   return (
     <Container>
       <Title>
@@ -46,11 +47,13 @@ const ListGroups = () => {
         <Icon
           style={{ position: 'absolute', right: '20px', top: '7px' }}
           type="plus"
+          onClick={() => toggleModal(true)}
         />
       </Title>
       <div>
         <Groups />
       </div>
+      <CreateGroupModal visible={showModal} />
     </Container>
   )
 }
