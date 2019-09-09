@@ -1,14 +1,15 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import { Upload, Icon, message } from 'antd'
 import api from '../../../services/api'
+import { Icon, Upload, message } from 'antd'
 
-function getBase64(img, callback) {
+function getBase64 (img, callback) {
   const reader = new FileReader()
   reader.addEventListener('load', () => callback(reader.result))
   reader.readAsDataURL(img)
 }
 
-function beforeUpload(file) {
+function beforeUpload (file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
   if (!isJpgOrPng) {
     message.error('You can only upload JPG/PNG file!')
@@ -20,18 +21,22 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M
 }
 
-class Avatar extends React.Component {
-  state = {
-    loading: false
+class UploadImage extends React.Component {
+  constructor (props) {
+    super(props)
+    this.customRequest = this.customRequest.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.state = {
+      loading: false
+    }
   }
 
-  handleChange = info => {
+  handleChange (info) {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true })
       return
     }
     if (info.file.status === 'done') {
-      // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl =>
         this.setState({
           imageUrl,
@@ -41,7 +46,7 @@ class Avatar extends React.Component {
     }
   }
 
-  customRequest = options => {
+  customRequest (options) {
     const data = new FormData()
     data.append('image', options.file)
     api
@@ -55,7 +60,7 @@ class Avatar extends React.Component {
       })
   }
 
-  render() {
+  render () {
     const uploadButton = (
       <div>
         <Icon type={this.state.loading ? 'loading' : 'plus'} />
@@ -72,6 +77,7 @@ class Avatar extends React.Component {
         customRequest={this.customRequest}
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
+        style={{ padding: 0 }}
       >
         {imageUrl ? (
           <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
@@ -83,4 +89,8 @@ class Avatar extends React.Component {
   }
 }
 
-export default Avatar
+UploadImage.propTypes = {
+  onChange: PropTypes.func.isRequired
+}
+
+export default UploadImage

@@ -1,12 +1,12 @@
 import GroupInfo from './components/GroupInfo'
 import ListGroups from './components/ListGroups'
-import React, { useEffect } from 'react'
 import SideBarSecondary from './components/SideBarSecondary'
 import UserInfo from './components/UserInfo'
+import { actions } from '../../store/ducks/groups'
+import { getMyGroupsService } from '../../services/group'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { getMyGroupsService } from '../../services/group'
-import { actions } from '../../store/ducks/groups'
+import React, { useEffect } from 'react'
 
 const Container = styled.div`
   width: 100%;

@@ -1,15 +1,22 @@
 import Colors from '../../../assets/styles/Colors'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
 import UploadImage from './UploadImage'
+import { actions } from '../../../store/ducks/groups'
+import { createGroupService } from '../../../services/group'
 import styled from 'styled-components'
-import { Input, Modal } from 'antd'
+import { useDispatch } from 'react-redux'
+import { Button, Input, Modal } from 'antd'
+import React, { useState } from 'react'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
+`
+
+const ButtonContainer = styled.div`
+  margin-top: 8px;
 `
 
 const Label = styled.div`
@@ -23,18 +30,30 @@ const UploadImageContainer = styled.div`
   margin-bottom: 8px;
 `
 
-const CreateGroupModal = ({ visible }) => {
+const CreateGroupModal = ({ visible, onClose }) => {
   const [image, changeImage] = useState('')
   const [name, changeName] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  console.log('image', image)
-  console.log('name', name)
+  const dispatch = useDispatch()
+
+  const createGroup = async () => {
+    setLoading(true)
+    if (image !== '' && name !== '') {
+      const { group } = await createGroupService({ name, image })
+      dispatch(actions.addGroup({ group }))
+    }
+    setLoading(false)
+    onClose()
+  }
+
   return (
     <Modal
-      closable={false}
+      closable={true}
       bodyStyle={{ backgroundColor: Colors.darkPurple }}
       visible={visible}
       footer={null}
+      onCancel={onClose}
     >
       <Container>
         <UploadImageContainer>
@@ -48,6 +67,11 @@ const CreateGroupModal = ({ visible }) => {
             placeholder={'Name'}
           />
         </div>
+        <ButtonContainer>
+          <Button onClick={createGroup} loading={loading} >
+            Criar Grupo
+          </Button>
+        </ButtonContainer>
       </Container>
     </Modal>
   )
