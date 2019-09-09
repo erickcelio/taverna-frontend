@@ -44,6 +44,8 @@ const CreateGroupModal = ({ visible, onClose }) => {
       dispatch(actions.addGroup({ group }))
     }
     setLoading(false)
+    changeImage('')
+    changeName('')
     onClose()
   }
 
@@ -78,7 +80,8 @@ const CreateGroupModal = ({ visible, onClose }) => {
 }
 
 CreateGroupModal.propTypes = {
-  visible: PropTypes.bool.isRequired
+  visible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
 }
 
 export default CreateGroupModal

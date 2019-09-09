@@ -3,7 +3,8 @@ import CreateGroupModal from './CreateGroupModal'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Avatar, Icon } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 const Container = styled.div`
   display: flex;
@@ -12,9 +13,16 @@ const Container = styled.div`
   background-color: ${Colors.darkPurple};
 `
 
+const GroupsAndIconsContainer = styled.div`
+  margin: 20px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const GroupsContainer = styled.div`
   overflow: hidden;
-  margin-top: 20px;
+  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -28,22 +36,63 @@ const Title = styled.div`
   position: relative;
 `
 
-const Groups = () => {
-  const useGroups = () =>
-    useSelector(state => state.groups, [])
-  const groups = useGroups()
-  console.log('testeasdas', groups)
+const useGroups = () => useSelector(state => state.groups, [])
+
+const Groups = ({ groups }) => {
   return (
     <GroupsContainer>
       {groups.map(({ image, name }) => (
-        <Avatar style={{ minWidth: 64, margin: '0 8px' }} key={name} shape="square" size={64} src={image} />
+        <Avatar
+          style={{ minWidth: 64, margin: '0 8px' }}
+          key={name}
+          shape="square"
+          size={64}
+          src={image}
+        />
       ))}
     </GroupsContainer>
   )
 }
 
+Groups.propTypes = {
+  groups: PropTypes.array.isRequired
+}
+
 const ListGroups = () => {
+  const [groups, setGroups] = useState([])
+  const [groupsIndex, changeGroupsIndex] = useState(0)
+  const [rightArrowEnabled, toggleRightArrow] = useState(false)
+  const [leftArrowEnabled, toggleLeftArrow] = useState(false)
   const [showModal, toggleModal] = useState(false)
+
+  const handleArrowClick = (type) => {
+    let groupsIndexValue = groupsIndex
+    if (type === 'increment' && rightArrowEnabled) {
+      groupsIndexValue++
+    } else if (type === 'decrement' && leftArrowEnabled) {
+      groupsIndexValue--
+    }
+    changeGroupsIndex(groupsIndexValue)
+  }
+
+  const allGroups = useGroups()
+
+  useEffect(() => {
+    const groupsNumber = allGroups.length / 3
+
+    if (groupsNumber > 1) {
+      const selectedGroups = []
+      selectedGroups.push(allGroups[groupsIndex])
+      selectedGroups.push(allGroups[groupsIndex + 1])
+      selectedGroups.push(allGroups[groupsIndex + 2])
+      setGroups(selectedGroups)
+      toggleLeftArrow(groupsIndex > 0)
+      toggleRightArrow(groupsIndex + 3 < allGroups.length)
+    } else {
+      setGroups(allGroups)
+    }
+  }, [groupsIndex, allGroups])
+
   return (
     <Container>
       <Title>
@@ -54,10 +103,23 @@ const ListGroups = () => {
           onClick={() => toggleModal(true)}
         />
       </Title>
-      <div>
-        <Groups />
-      </div>
-      <CreateGroupModal visible={showModal} onClose={() => toggleModal(false)} />
+      <GroupsAndIconsContainer>
+        <Icon
+          onClick={() => handleArrowClick('decrement')}
+          type="left"
+          style={{ fontSize: 24, color: leftArrowEnabled ? 'white' : 'gray' }}
+        />
+        <Groups groups={groups} />
+        <Icon
+          onClick={() => handleArrowClick('increment')}
+          type="right"
+          style={{ fontSize: 24, color: rightArrowEnabled ? 'white' : 'gray' }}
+        />
+      </GroupsAndIconsContainer>
+      <CreateGroupModal
+        visible={showModal}
+        onClose={() => toggleModal(false)}
+      />
     </Container>
   )
 }
