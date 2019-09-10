@@ -1,10 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Icon } from 'antd'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { actions } from '../store/ducks/auth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import logoImg from '../assets/img/logo.png'
 import pages from '../routes/AppPages'
 import styled from 'styled-components'
@@ -50,7 +49,7 @@ const MenuContainer = styled.div`
   }
 
   svg {
-    width: 100%;
+    width: 30px;
     margin: 5px 0;
     height: 25px;
   }
@@ -80,7 +79,7 @@ const SideBar = ({ logout, history }) => {
         onClick={() => history.push(item.path)}
         active={item.path === path}
       >
-        <FontAwesomeIcon color="white" size="2x" icon={item.icon} />
+        <Icon style={{ color: 'white' }} type={item.icon}/>
       </IconContainer>
     ))
   }
@@ -93,7 +92,7 @@ const SideBar = ({ logout, history }) => {
       <MenuContainer>{renderMenuIcons(pages)}</MenuContainer>
       <LogOutContainer>
         <IconContainer onClick={logout}>
-          <FontAwesomeIcon icon={faSignOutAlt} color="white" size="2x" />
+          <Icon style={{ color: 'white', fontSize: '25px' }} type='logout' />
         </IconContainer>
       </LogOutContainer>
     </Container>
