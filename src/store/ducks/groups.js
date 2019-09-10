@@ -1,4 +1,6 @@
 // Types
+import { useSelector } from 'react-redux'
+
 export const Types = {
   ADD_GROUP: 'groups/ADD',
   SET_GROUPS: 'groups/SET'
@@ -26,6 +28,9 @@ export const actions = {
     }
   }
 }
+
+// Selectors
+export const useGroupsSelector = () => useSelector(state => state.groups, [])
 
 // Reducer
 export default (state = initialState, action) => {

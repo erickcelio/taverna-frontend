@@ -1,10 +1,15 @@
 import Colors from '../../../assets/styles/Colors'
 import CreateGroupModal from './CreateGroupModal'
+import GroupMenu from './GroupMenu'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
-import { Avatar, Icon } from 'antd'
+import { useDispatch } from 'react-redux'
+import { useGroupsSelector } from '../../../store/ducks/groups'
+import { Avatar, Dropdown, Icon, Tooltip } from 'antd'
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import {
+  selectGroup,
+  useSelectedGroupSelector
+} from '../../../store/ducks/selectedGroup'
 
 const Container = styled.div`
   display: flex;
@@ -36,26 +41,10 @@ const Title = styled.div`
   position: relative;
 `
 
-const useGroups = () => useSelector(state => state.groups, [])
-
-const Groups = ({ groups }) => {
-  return (
-    <GroupsContainer>
-      {groups.map(({ image, name }) => (
-        <Avatar
-          style={{ minWidth: 64, margin: '0 8px' }}
-          key={name}
-          shape="square"
-          size={64}
-          src={image}
-        />
-      ))}
-    </GroupsContainer>
-  )
-}
-
-Groups.propTypes = {
-  groups: PropTypes.array.isRequired
+const AvatarStyle = {
+  minWidth: 64,
+  margin: '0 8px',
+  cursor: 'pointer'
 }
 
 const ListGroups = () => {
@@ -65,7 +54,12 @@ const ListGroups = () => {
   const [leftArrowEnabled, toggleLeftArrow] = useState(false)
   const [showModal, toggleModal] = useState(false)
 
-  const handleArrowClick = (type) => {
+  const allGroups = useGroupsSelector()
+  const selectedGroup = useSelectedGroupSelector()
+
+  const dispatch = useDispatch()
+
+  const handleArrowClick = type => {
     let groupsIndexValue = groupsIndex
     if (type === 'increment' && rightArrowEnabled) {
       groupsIndexValue++
@@ -74,8 +68,6 @@ const ListGroups = () => {
     }
     changeGroupsIndex(groupsIndexValue)
   }
-
-  const allGroups = useGroups()
 
   useEffect(() => {
     const groupsNumber = allGroups.length / 3
@@ -91,7 +83,7 @@ const ListGroups = () => {
     } else {
       setGroups(allGroups)
     }
-  }, [groupsIndex, allGroups])
+  }, [groupsIndex, allGroups, selectedGroup])
 
   return (
     <Container>
@@ -109,7 +101,28 @@ const ListGroups = () => {
           type="left"
           style={{ fontSize: 24, color: leftArrowEnabled ? 'white' : 'gray' }}
         />
-        <Groups groups={groups} />
+        <GroupsContainer>
+          {groups.map(group => {
+            const { name, image, _id } = group
+            return (
+              <Dropdown
+                overlay={<GroupMenu group={group} />}
+                key={_id}
+                trigger={['contextMenu']}
+              >
+                <Tooltip title={name} placement="bottom">
+                  <Avatar
+                    style={AvatarStyle}
+                    onClick={() => dispatch(selectGroup({ group }))}
+                    shape="square"
+                    size={64}
+                    src={image}
+                  />
+                </Tooltip>
+              </Dropdown>
+            )
+          })}
+        </GroupsContainer>
         <Icon
           onClick={() => handleArrowClick('increment')}
           type="right"
