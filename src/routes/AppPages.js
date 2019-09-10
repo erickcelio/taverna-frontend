@@ -9,31 +9,31 @@ export default [
   {
     path: '/home',
     name: 'home',
-    icon: faHome,
+    icon: 'home',
     component: HomePage
   },
   {
     path: '/group',
     name: 'group',
-    icon: faUsers,
+    icon: 'team',
     component: GroupPage
   },
   {
     path: '/chat',
     name: 'chat',
-    icon: faCommentDots,
+    icon: 'message',
     component: ChatPage
   },
   {
     path: '/tasks',
     name: 'tasks',
-    icon: faTasks,
+    icon: 'profile',
     component: TaskPage
   },
   {
     path: '/settings',
     name: 'settings',
-    icon: faCog,
+    icon: 'setting',
     component: SettingsPage
   }
 ]
