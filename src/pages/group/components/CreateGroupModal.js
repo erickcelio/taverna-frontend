@@ -1,4 +1,3 @@
-import Colors from '../../../assets/styles/Colors'
 import PropTypes from 'prop-types'
 import UploadImage from './UploadImage'
 import { actions } from '../../../store/ducks/groups'
@@ -6,13 +5,19 @@ import { createGroupService } from '../../../services/group'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { Button, Input, Modal } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
 import React, { useState } from 'react'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+`
+
+const InputsContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 `
 
 const ButtonContainer = styled.div`
@@ -27,15 +32,21 @@ const Label = styled.div`
 `
 
 const UploadImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 8px;
 `
 
-const CreateGroupModal = ({ visible, onClose }) => {
+const CreateGroupModal = ({ visible, onClose, intl: { formatMessage } }) => {
   const [image, changeImage] = useState('')
   const [name, changeName] = useState('')
   const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
+
+  const intlPrefix = 'groups.create-group-modal'
 
   const createGroup = async () => {
     setLoading(true)
@@ -52,26 +63,30 @@ const CreateGroupModal = ({ visible, onClose }) => {
   return (
     <Modal
       closable={true}
-      bodyStyle={{ backgroundColor: Colors.darkPurple }}
+      title={formatMessage({ id: `${intlPrefix}.title` })}
       visible={visible}
       footer={null}
       onCancel={onClose}
     >
       <Container>
-        <UploadImageContainer>
-          <UploadImage onChange={changeImage} />
-        </UploadImageContainer>
-        <div>
-          <Label>Group Name</Label>
-          <Input
-            value={name}
-            onChange={({ target }) => changeName(target.value)}
-            placeholder={'Name'}
-          />
-        </div>
+        <InputsContainer>
+          <div>
+            <Label>
+              <FormattedMessage id={`${intlPrefix}.name`} />
+            </Label>
+            <Input
+              value={name}
+              onChange={({ target }) => changeName(target.value)}
+            />
+          </div>
+          <UploadImageContainer>
+            <FormattedMessage id={`${intlPrefix}.image`} />
+            <UploadImage onChange={changeImage} />
+          </UploadImageContainer>
+        </InputsContainer>
         <ButtonContainer>
-          <Button onClick={createGroup} loading={loading} >
-            Criar Grupo
+          <Button ghost type='primary' onClick={createGroup} loading={loading} >
+            <FormattedMessage id={`${intlPrefix}.confirm-button`} />
           </Button>
         </ButtonContainer>
       </Container>
@@ -81,7 +96,8 @@ const CreateGroupModal = ({ visible, onClose }) => {
 
 CreateGroupModal.propTypes = {
   visible: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  intl: PropTypes.object.isRequired
 }
 
-export default CreateGroupModal
+export default injectIntl(CreateGroupModal)

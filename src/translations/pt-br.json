@@ -25,5 +25,18 @@
   "input.error.username-already-exists": "Este usuário já está em uso",
 
   "input.error.invalid-username": "Este usuário não foi encontrado",
-  "input.error.invalid-password": "Esta senha não é válida"
+  "input.error.invalid-password": "Esta senha não é válida",
+
+  "groups": "Grupos",
+  "groups.create-group-modal.title": "Criar Grupo",
+  "groups.create-group-modal.name": "Nome do Grupo",
+  "groups.create-group-modal.image": "Imagem do Grupo",
+  "groups.create-group-modal.confirm-button": "Criar Grupo",
+  "groups.group-menu.group-settings": "Configurações do Grupo",
+  "groups.group-menu.delete-group": "Excluir Grupo",
+  "groups.delete-group-modal.title": "Tem certeza que deseja excluir o grupo {name} ?",
+  "groups.delete-group-modal.content": "Tem certeza que deseja fazer isso?",
+  "groups.delete-group-modal.ok-button": "Sim, eu tenho",
+  "groups.delete-group-modal.cancel-button": "Não, quero voltar"
+
 }

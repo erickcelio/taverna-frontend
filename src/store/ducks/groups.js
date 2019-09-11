@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 
 export const Types = {
   ADD_GROUP: 'groups/ADD',
-  SET_GROUPS: 'groups/SET'
+  SET_GROUPS: 'groups/SET',
+  REMOVE_GROUP: 'groups/REMOVE'
 }
 
 // Initial State
@@ -29,6 +30,15 @@ export const actions = {
   }
 }
 
+export const removeGroupAction = ({ group }) => {
+  return {
+    type: Types.REMOVE_GROUP,
+    payload: {
+      group
+    }
+  }
+}
+
 // Selectors
 export const useGroupsSelector = () => useSelector(state => state.groups, [])
 
@@ -41,6 +51,9 @@ export default (state = initialState, action) => {
     }
     case Types.SET_GROUPS: {
       return action.payload.groups
+    }
+    case Types.REMOVE_GROUP: {
+      return state.filter(group => group._id !== action.payload.group._id)
     }
     default: {
       return state

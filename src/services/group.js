@@ -11,3 +11,8 @@ export const createGroupService = async ({ name, image }) => {
   const { data } = await api.post(groupEndpoint, { name, image })
   return data
 }
+
+export const deleteGroupService = async ({ _id }) => {
+  const { data } = await api.delete(`${groupEndpoint}/${_id}`)
+  return data
+}

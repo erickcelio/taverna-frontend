@@ -25,5 +25,17 @@
   "input.error.username-already-exists": "This username is already in use",
 
   "input.error.invalid-username": "User not found",
-  "input.error.invalid-password": "This password is invalid"
+  "input.error.invalid-password": "This password is invalid",
+
+  "groups": "Groups",
+  "groups.create-group-modal.title": "Create Group",
+  "groups.create-group-modal.name": "Group Name",
+  "groups.create-group-modal.image": "Group Image",
+  "groups.create-group-modal.confirm-button": "Create Group",
+  "groups.group-menu.group-settings": "Group Settings",
+  "groups.group-menu.delete-group": "Delete Group",
+  "groups.delete-group-modal.title": "Do you Want to delete group {name} ?",
+  "groups.delete-group-modal.content": "Hey, you are sure about that?",
+  "groups.delete-group-modal.ok-button": "Yes, I'am",
+  "groups.delete-group-modal.cancel-button": "No, I wanna back"
 }
