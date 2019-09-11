@@ -13,6 +13,7 @@ deploy-prod:
   only:
     - master
   script:
+    - npm i -g firebase-tools
     - npm i
     - npm run build
     - firebase use $PROJECT_NAME --token $FIREBASE_TOKEN
