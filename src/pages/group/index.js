@@ -25,7 +25,7 @@ const GroupPage = () => {
 
   useEffect(() => {
     getMyGroups()
-  }, [])
+  })
 
   return (
     <Container>
