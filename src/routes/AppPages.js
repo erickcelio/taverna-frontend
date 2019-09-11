@@ -3,7 +3,6 @@ import GroupPage from '../pages/group'
 import HomePage from '../pages/home'
 import SettingsPage from '../pages/settings'
 import TaskPage from '../pages/task'
-import { faCog, faCommentDots, faHome, faTasks, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 export default [
   {
