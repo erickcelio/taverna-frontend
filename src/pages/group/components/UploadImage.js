@@ -27,6 +27,7 @@ class UploadImage extends React.Component {
     this.customRequest = this.customRequest.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.state = {
+      imageUrl: this.props.value || '',
       loading: false
     }
   }
@@ -67,7 +68,7 @@ class UploadImage extends React.Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     )
-    const { imageUrl } = this.state
+    const { imageUrl, loading } = this.state
     return (
       <Upload
         name="avatar"
@@ -79,7 +80,7 @@ class UploadImage extends React.Component {
         onChange={this.handleChange}
         style={{ padding: 0 }}
       >
-        {imageUrl ? (
+        {imageUrl && !loading ? (
           <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
         ) : (
           uploadButton
@@ -90,7 +91,8 @@ class UploadImage extends React.Component {
 }
 
 UploadImage.propTypes = {
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string
 }
 
 export default UploadImage

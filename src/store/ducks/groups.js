@@ -46,7 +46,14 @@ export const useGroupsSelector = () => useSelector(state => state.groups, [])
 export default (state = initialState, action) => {
   switch (action.type) {
     case Types.ADD_GROUP: {
-      state.push(action.payload.group)
+      const { group } = action.payload
+      const groupIndex = state.findIndex(({ _id }) => _id === group._id)
+      console.log(groupIndex)
+      if (groupIndex !== -1) {
+        state[groupIndex] = group
+      } else {
+        state.push(action.payload.group)
+      }
       return state
     }
     case Types.SET_GROUPS: {

@@ -1,7 +1,9 @@
 import Colors from '../../../assets/styles/Colors'
 import CreateGroupModal from './CreateGroupModal'
+import EditGroupModal from './EditGroupModal'
 import GroupMenu from './GroupMenu'
 import { Icon } from 'antd'
+import { isEmpty } from 'lodash'
 import Slider from 'react-slick'
 import styled from 'styled-components'
 import { useGroupsSelector } from '../../../store/ducks/groups'
@@ -27,7 +29,8 @@ const Title = styled.div`
 `
 
 const ListGroups = () => {
-  const [showModal, toggleModal] = useState(false)
+  const [showCreateModal, toggleCreateModal] = useState(false)
+  const [selectedGroupEdit, editGroup] = useState({})
 
   const groups = useGroupsSelector()
   const selectedGroup = useSelectedGroupSelector()
@@ -54,7 +57,7 @@ const ListGroups = () => {
         <Icon
           style={{ position: 'absolute', right: '20px', top: '7px' }}
           type="plus"
-          onClick={() => toggleModal(true)}
+          onClick={() => toggleCreateModal(true)}
         />
       </Title>
       <GroupsContainer>
@@ -62,16 +65,30 @@ const ListGroups = () => {
           {groups.map((group, index) => (
             <GroupMenu
               active={index === selectGroupIndex}
+              onEdit={editGroup}
               key={group._id}
               group={group}
             />
           ))}
         </Slider>
       </GroupsContainer>
-      <CreateGroupModal
-        visible={showModal}
-        onClose={() => toggleModal(false)}
-      />
+      {
+        showCreateModal && (
+          <CreateGroupModal
+            visible
+            onClose={() => toggleCreateModal(false)}
+          />
+        )
+      }
+      {
+        !isEmpty(selectedGroupEdit) && (
+          <EditGroupModal
+            group={selectedGroupEdit}
+            visible
+            onClose={() => editGroup({})}
+          />
+        )
+      }
     </Container>
   )
 }

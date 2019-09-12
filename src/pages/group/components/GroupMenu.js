@@ -16,11 +16,11 @@ const AvatarStyled = styled(Avatar)`
   ${props =>
     props.active &&
     `
-    transform: scale(1.1)
+    transform: scale(1.2)
   `}
 `
 
-const GroupMenu = ({ active, group, intl: { formatMessage } }) => {
+const GroupMenu = ({ active, onEdit, group, intl: { formatMessage } }) => {
   const dispatch = useDispatch()
 
   const showConfirmDeleteGroup = () => {
@@ -46,7 +46,7 @@ const GroupMenu = ({ active, group, intl: { formatMessage } }) => {
     const intlPrefix = 'groups.group-menu'
     return (
       <Menu>
-        <Menu.Item key="1">
+        <Menu.Item key="1" onClick={() => onEdit(group)}>
           <FormattedMessage id={`${intlPrefix}.group-settings`} />
         </Menu.Item>
         <Menu.Item onClick={() => showConfirmDeleteGroup(group)} key="2">
@@ -62,7 +62,7 @@ const GroupMenu = ({ active, group, intl: { formatMessage } }) => {
     >
       <Tooltip title={group.name} placement="bottom">
         <AvatarStyled
-          active={active}
+          active={active ? 1 : 0}
           onClick={() => dispatch(selectGroup({ group }))}
           shape="square"
           size={64}
@@ -76,7 +76,7 @@ const GroupMenu = ({ active, group, intl: { formatMessage } }) => {
 GroupMenu.propTypes = {
   group: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  active: PropTypes.bool.isRequired
+  active: PropTypes.bool
 }
 
 export default injectIntl(GroupMenu)
