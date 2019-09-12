@@ -76,7 +76,8 @@ const GroupMenu = ({ active, onEdit, group, intl: { formatMessage } }) => {
 GroupMenu.propTypes = {
   group: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  onEdit: PropTypes.func.isRequired
 }
 
 export default injectIntl(GroupMenu)

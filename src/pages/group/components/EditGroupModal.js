@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import UploadImage from './UploadImage'
 import { actions } from '../../../store/ducks/groups'
-import { createGroupService, editGroupService } from '../../../services/group'
+import { editGroupService } from '../../../services/group'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { Button, Input, Modal } from 'antd'
