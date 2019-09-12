@@ -3,18 +3,24 @@ import React from 'react'
 import { deleteGroupService } from '../../../services/group'
 import { removeGroupAction } from '../../../store/ducks/groups'
 import { selectGroup } from '../../../store/ducks/selectedGroup'
+import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { Avatar, Dropdown, Menu, Modal, Tooltip, message } from 'antd'
 import { FormattedMessage, injectIntl } from 'react-intl'
 
-const AvatarStyle = {
-  minWidth: 64,
-  margin: '0 8px',
-  cursor: 'pointer',
-  userSelect: 'none'
-}
+const AvatarStyled = styled(Avatar)`
+  min-width: 64px;
+  margin: 8px;
+  cursor: pointer;
+  user-select: none;
+  ${props =>
+    props.active &&
+    `
+    transform: scale(1.1)
+  `}
+`
 
-const GroupMenu = ({ group, intl: { formatMessage } }) => {
+const GroupMenu = ({ active, group, intl: { formatMessage } }) => {
   const dispatch = useDispatch()
 
   const showConfirmDeleteGroup = () => {
@@ -55,8 +61,8 @@ const GroupMenu = ({ group, intl: { formatMessage } }) => {
       trigger={['contextMenu']}
     >
       <Tooltip title={group.name} placement="bottom">
-        <Avatar
-          style={AvatarStyle}
+        <AvatarStyled
+          active={active}
           onClick={() => dispatch(selectGroup({ group }))}
           shape="square"
           size={64}
@@ -69,7 +75,8 @@ const GroupMenu = ({ group, intl: { formatMessage } }) => {
 
 GroupMenu.propTypes = {
   group: PropTypes.object.isRequired,
-  intl: PropTypes.object.isRequired
+  intl: PropTypes.object.isRequired,
+  active: PropTypes.bool.isRequired
 }
 
 export default injectIntl(GroupMenu)

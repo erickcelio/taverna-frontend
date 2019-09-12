@@ -20,7 +20,7 @@ export const selectGroup = ({ group }) => {
 
 // Selectors
 export const useSelectedGroupSelector = () =>
-  useSelector(state => state.selectGroup)
+  useSelector(state => state.selectedGroup)
 
 // Reducer
 export default (state = initialState, action) => {
