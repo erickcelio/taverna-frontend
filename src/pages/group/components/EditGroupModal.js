@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { Button, Input, Modal } from 'antd'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import React, { useState } from 'react'
+import { selectGroup, useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
 
 const Container = styled.div`
   display: flex;
@@ -44,6 +45,8 @@ const EditGroupModal = ({ group, visible, onClose, intl: { formatMessage } }) =>
   const [name, changeName] = useState(group.name)
   const [loading, setLoading] = useState(false)
 
+  const selectedGroup = useSelectedGroupSelector()
+
   const dispatch = useDispatch()
 
   const intlPrefix = 'groups.edit-group-modal'
@@ -55,6 +58,9 @@ const EditGroupModal = ({ group, visible, onClose, intl: { formatMessage } }) =>
       try {
         const data = await editGroupService({ name, image, _id })
         dispatch(actions.addGroup({ group: data.group }))
+        if (selectedGroup._id === _id) {
+          dispatch(selectGroup({ group: data.group }))
+        }
         onClose()
       } catch (e) {
         console.log('Error =>', e)
