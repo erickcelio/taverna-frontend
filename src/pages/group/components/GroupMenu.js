@@ -47,7 +47,7 @@ const GroupMenu = ({ active, onEdit, group, intl: { formatMessage } }) => {
     return (
       <Menu>
         <Menu.Item key="1" onClick={() => onEdit(group)}>
-          <FormattedMessage id={`${intlPrefix}.group-settings`} />
+          <FormattedMessage id={`${intlPrefix}.edit-group`} />
         </Menu.Item>
         <Menu.Item onClick={() => showConfirmDeleteGroup(group)} key="2">
           <FormattedMessage id={`${intlPrefix}.delete-group`} />

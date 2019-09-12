@@ -36,7 +36,7 @@
   "groups.edit-group-modal.name": "Group Name",
   "groups.edit-group-modal.image": "Group Image",
   "groups.edit-group-modal.confirm-button": "Edit Group",
-  "groups.group-menu.group-settings": "Group Settings",
+  "groups.group-menu.edit-group": "Edit Group",
   "groups.group-menu.delete-group": "Delete Group",
   "groups.delete-group-modal.title": "Do you Want to delete group {name} ?",
   "groups.delete-group-modal.content": "Hey, you are sure about that?",
