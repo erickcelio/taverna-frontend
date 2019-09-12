@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
 
 const GroupInfo = () => {
-  return <div style={{ flex: 1 }}>GroupInfo</div>
+  const group = useSelectedGroupSelector()
+  return <div style={{ flex: 1 }}>{group.name}</div>
 }
 
 export default GroupInfo

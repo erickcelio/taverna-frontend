@@ -49,15 +49,18 @@ const CreateGroupModal = ({ visible, onClose, intl: { formatMessage } }) => {
   const intlPrefix = 'groups.create-group-modal'
 
   const createGroup = async () => {
-    setLoading(true)
     if (image !== '' && name !== '') {
-      const { group } = await createGroupService({ name, image })
-      dispatch(actions.addGroup({ group }))
+      setLoading(true)
+      try {
+        const { group } = await createGroupService({ name, image })
+        dispatch(actions.addGroup({ group }))
+        onClose()
+      } catch (e) {
+        console.log('Error =>', e)
+      } finally {
+        setLoading(false)
+      }
     }
-    setLoading(false)
-    changeImage('')
-    changeName('')
-    onClose()
   }
 
   return (

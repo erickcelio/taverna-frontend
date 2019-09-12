@@ -49,11 +49,18 @@ const EditGroupModal = ({ group, visible, onClose, intl: { formatMessage } }) =>
   const intlPrefix = 'groups.edit-group-modal'
 
   const editGroup = async () => {
-    setLoading(true)
     if (image !== '' && name !== '') {
+      setLoading(true)
       const { _id } = group
-      const data = await editGroupService({ name, image, _id })
-      dispatch(actions.addGroup({ group: data.group }))
+      try {
+        const data = await editGroupService({ name, image, _id })
+        dispatch(actions.addGroup({ group: data.group }))
+        onClose()
+      } catch (e) {
+        console.log('Error =>', e)
+      } finally {
+        setLoading(false)
+      }
     }
     setLoading(false)
     changeImage('')
