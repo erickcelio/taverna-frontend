@@ -1,3 +1,6 @@
+import { Avatar, Dropdown, Menu, Modal, Tooltip, message } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
+
 import PropTypes from 'prop-types'
 import React from 'react'
 import { deleteGroupService } from '../../../services/group'
@@ -5,8 +8,6 @@ import { removeGroupAction } from '../../../store/ducks/groups'
 import { selectGroup } from '../../../store/ducks/selectedGroup'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { Avatar, Dropdown, Menu, Modal, Tooltip, message } from 'antd'
-import { FormattedMessage, injectIntl } from 'react-intl'
 
 const AvatarStyled = styled(Avatar)`
   min-width: 64px;
@@ -33,11 +34,9 @@ const GroupMenu = ({ active, onEdit, group, intl: { formatMessage } }) => {
       okType: 'danger',
       cancelText: formatMessage({ id: `${intlPrefix}.cancel-button` }),
       async onOk () {
-        const data = await deleteGroupService({ _id })
-        if (data.message === 'group_deleted_with_success') {
-          dispatch(removeGroupAction({ group }))
-          message.success('Group deleted with success!')
-        }
+        const group = await deleteGroupService({ _id })
+        dispatch(removeGroupAction({ group }))
+        message.success('Group deleted with success!')
       }
     })
   }

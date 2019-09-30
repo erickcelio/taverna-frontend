@@ -6,8 +6,12 @@ import App from './App'
 import { IntlProvider } from 'react-intl'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { firebaseConfig } from './config/index'
+import { initializeApp } from 'firebase'
 import messagesEn from './translations/en-us'
 import messagesPt from './translations/pt-br'
+
+initializeApp(firebaseConfig)
 
 const messages = {
   'pt-BR': messagesPt,

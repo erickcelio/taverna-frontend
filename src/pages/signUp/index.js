@@ -1,3 +1,7 @@
+import { Button, FormBox, FormDiv, Header, HeaderH2 } from './../signIn/styles'
+import { Form, Icon, Input } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
+
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -8,9 +12,6 @@ import { registerService } from '../../services/auth'
 import styled from 'styled-components'
 import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
-import { Button, FormBox, FormDiv, Header, HeaderH2 } from './../signIn/styles'
-import { Form, Icon, Input } from 'antd'
-import { FormattedMessage, injectIntl } from 'react-intl'
 
 const InputStyled = styled(Input)`
   width: 280px;
@@ -212,7 +213,7 @@ const SignUpPageWithFormik = withFormik({
       props.login(response)
       props.history.push('/home')
     } catch (e) {
-      const error = e.response.data.error
+      const error = e.message
       switch (error) {
         case 'email_already_exists':
           setStatus({ email: 'email-already-exists' })

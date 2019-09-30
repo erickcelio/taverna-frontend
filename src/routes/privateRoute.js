@@ -1,10 +1,10 @@
+import { Redirect, Route } from 'react-router-dom'
+
 import PropTypes from 'prop-types'
 import React from 'react'
-
 import SideBar from '../components/SideBar'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { Redirect, Route } from 'react-router-dom'
 
 const Container = styled.div`
   margin-left: 65px;

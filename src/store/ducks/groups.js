@@ -20,7 +20,7 @@ export const actions = {
       }
     }
   },
-  setGroups: ({ groups }) => {
+  setGroups: ({ groups = [] }) => {
     return {
       type: Types.SET_GROUPS,
       payload: {
@@ -48,7 +48,6 @@ export default (state = initialState, action) => {
     case Types.ADD_GROUP: {
       const { group } = action.payload
       const groupIndex = state.findIndex(({ _id }) => _id === group._id)
-      console.log(groupIndex)
       if (groupIndex !== -1) {
         state[groupIndex] = group
       } else {

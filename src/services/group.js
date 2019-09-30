@@ -1,23 +1,38 @@
-import api from './api'
+import { UpdateGroupMutation, createGroupMutation, deleteGroupMutation } from '../graphql/mutations'
 
-const groupEndpoint = '/group'
+import GraphQLClient from './graphql'
+import { getMyGroupsQuery } from '../graphql/queries'
 
 export const getMyGroupsService = async () => {
-  const { data } = await api.get('group?myGroups=true&withRoles=true&withMembers=true')
-  return data
+  const { data } = await GraphQLClient.query({
+    query: getMyGroupsQuery
+  })
+
+  return data.getMyGroups
 }
 
 export const createGroupService = async ({ name, image }) => {
-  const { data } = await api.post(groupEndpoint, { name, image })
-  return data
+  const { data } = await GraphQLClient.mutate({
+    mutation: createGroupMutation,
+    variables: { name, image }
+  })
+
+  return data.createGroup
 }
 
 export const editGroupService = async ({ name, image, _id }) => {
-  const { data } = await api.patch(`${groupEndpoint}/${_id}`, { name, image })
-  return data
+  const { data } = await GraphQLClient.mutate({
+    mutation: UpdateGroupMutation,
+    variables: { groupId: _id, name, image }
+  })
+
+  return data.updateGroup
 }
 
 export const deleteGroupService = async ({ _id }) => {
-  const { data } = await api.delete(`${groupEndpoint}/${_id}`)
-  return data
+  const { data } = await GraphQLClient.mutate({
+    mutation: deleteGroupMutation,
+    variables: { groupId: _id }
+  })
+  return data.deleteGroup
 }

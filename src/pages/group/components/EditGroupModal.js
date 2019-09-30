@@ -1,13 +1,14 @@
+import { Button, Input, Modal } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
+import React, { useState } from 'react'
+import { selectGroup, useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
+
 import PropTypes from 'prop-types'
 import UploadImage from './UploadImage'
 import { actions } from '../../../store/ducks/groups'
 import { editGroupService } from '../../../services/group'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { Button, Input, Modal } from 'antd'
-import { FormattedMessage, injectIntl } from 'react-intl'
-import React, { useState } from 'react'
-import { selectGroup, useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
 
 const Container = styled.div`
   display: flex;
@@ -56,19 +57,17 @@ const EditGroupModal = ({ group, visible, onClose, intl: { formatMessage } }) =>
       setLoading(true)
       const { _id } = group
       try {
-        const data = await editGroupService({ name, image, _id })
-        dispatch(actions.addGroup({ group: data.group }))
+        const group = await editGroupService({ name, image, _id })
+        dispatch(actions.addGroup({ group }))
         if (selectedGroup._id === _id) {
-          dispatch(selectGroup({ group: data.group }))
+          dispatch(selectGroup({ group }))
         }
-        onClose()
       } catch (e) {
         console.log('Error =>', e)
       } finally {
         setLoading(false)
       }
     }
-    setLoading(false)
     changeImage('')
     changeName('')
     onClose()

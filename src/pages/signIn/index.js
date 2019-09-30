@@ -1,3 +1,7 @@
+import { Button, FormBox, FormDiv, Header, HeaderH2, HeaderP } from './styles'
+import { Form, Icon, Input } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
+
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -7,9 +11,6 @@ import { connect } from 'react-redux'
 import { loginService } from '../../services/auth'
 import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
-import { Button, FormBox, FormDiv, Header, HeaderH2, HeaderP } from './styles'
-import { Form, Icon, Input } from 'antd'
-import { FormattedMessage, injectIntl } from 'react-intl'
 
 const SignInForm = props => {
   const {
@@ -134,7 +135,7 @@ const SignInPageWithFormik = withFormik({
       props.login(await loginService(values))
       props.history.push('/home')
     } catch (e) {
-      const error = e.response.data.error
+      const error = e.message
       switch (error) {
         case 'user_not_found':
           setStatus({ username: 'invalid-username' })

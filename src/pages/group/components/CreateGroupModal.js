@@ -1,12 +1,13 @@
+import { Button, Input, Modal } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
+import React, { useState } from 'react'
+
 import PropTypes from 'prop-types'
 import UploadImage from './UploadImage'
 import { actions } from '../../../store/ducks/groups'
 import { createGroupService } from '../../../services/group'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { Button, Input, Modal } from 'antd'
-import { FormattedMessage, injectIntl } from 'react-intl'
-import React, { useState } from 'react'
 
 const Container = styled.div`
   display: flex;
@@ -52,7 +53,7 @@ const CreateGroupModal = ({ visible, onClose, intl: { formatMessage } }) => {
     if (image !== '' && name !== '') {
       setLoading(true)
       try {
-        const { group } = await createGroupService({ name, image })
+        const group = await createGroupService({ name, image })
         dispatch(actions.addGroup({ group }))
         onClose()
       } catch (e) {

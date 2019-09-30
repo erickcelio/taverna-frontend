@@ -12,11 +12,11 @@
   "register.input.password": "Password",
   "register.input.repeat-password": "Repeat your password",
   "register.button.register": "SignUp",
-  "register.button.login": "Already is member ? Do Login",
+  "register.button.login": "Already is member ? Login",
 
   "recovery.input.email": "E-mail",
   "recovery.button.submit": "Submit",
-  "recovery.button.login": "Password recovered? Login",
+  "recovery.button.login": "Password recovered?",
 
   "input.error.required": "This input is required",
   "input.error.invalid-password-confirmation": "Password not are the same",

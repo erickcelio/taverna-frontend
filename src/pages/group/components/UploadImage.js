@@ -1,13 +1,8 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import api from '../../../services/api'
 import { Icon, Upload, message } from 'antd'
 
-function getBase64 (img, callback) {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
-}
+import PropTypes from 'prop-types'
+import React from 'react'
+import { uploadImage } from './../../../services/upload'
 
 function beforeUpload (file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -25,40 +20,20 @@ class UploadImage extends React.Component {
   constructor (props) {
     super(props)
     this.customRequest = this.customRequest.bind(this)
-    this.handleChange = this.handleChange.bind(this)
     this.state = {
       imageUrl: this.props.value || '',
       loading: false
     }
   }
 
-  handleChange (info) {
-    if (info.file.status === 'uploading') {
-      this.setState({ loading: true })
-      return
-    }
-    if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj, imageUrl =>
-        this.setState({
-          imageUrl,
-          loading: false
-        })
-      )
-    }
-  }
-
-  customRequest (options) {
-    const data = new FormData()
-    data.append('image', options.file)
-    api
-      .post('/upload', data)
-      .then(({ data }) => {
-        this.props.onChange(data.data.url)
-        options.onSuccess(data, options.file)
-      })
-      .catch(err => {
-        console.log('Err =>', err)
-      })
+  async customRequest (options) {
+    this.setState({ loading: true })
+    const imageUrl = await uploadImage(options.file)
+    this.props.onChange(imageUrl)
+    this.setState({
+      imageUrl,
+      loading: false
+    })
   }
 
   render () {
@@ -77,7 +52,6 @@ class UploadImage extends React.Component {
         showUploadList={false}
         customRequest={this.customRequest}
         beforeUpload={beforeUpload}
-        onChange={this.handleChange}
         style={{ padding: 0 }}
       >
         {imageUrl && !loading ? (
