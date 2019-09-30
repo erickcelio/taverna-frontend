@@ -1,11 +1,12 @@
+import { Button, FormBox, FormDiv, Header, HeaderH2 } from './../signIn/styles'
+import { Form, Icon, Input } from 'antd'
+import { FormattedMessage, injectIntl } from 'react-intl'
+
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
-import { Button, FormBox, FormDiv, Header, HeaderH2 } from './../signIn/styles'
-import { Form, Icon, Input } from 'antd'
-import { FormattedMessage, injectIntl } from 'react-intl'
 
 const SignUpForm = props => {
   const {

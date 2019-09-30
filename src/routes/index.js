@@ -1,8 +1,9 @@
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { RecoveryPage, SignInPage, SignUpPage } from '../pages'
+
 import AppPages from './AppPages'
 import PrivateRoute from './privateRoute'
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { RecoveryPage, SignInPage, SignUpPage } from '../pages'
 
 const Routes = () => (
   <BrowserRouter>

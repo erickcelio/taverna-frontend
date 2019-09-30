@@ -1,9 +1,10 @@
+import { FormattedMessage, injectIntl } from 'react-intl'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
-import { FormattedMessage, injectIntl } from 'react-intl'
 
 const InputContainer = styled.div`
   margin-top: 16px;

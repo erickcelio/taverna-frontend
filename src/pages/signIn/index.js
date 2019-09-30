@@ -1,6 +1,7 @@
 import { Button, FormBox, FormDiv, Header, HeaderH2, HeaderP } from './styles'
 import { Form, Icon, Input } from 'antd'
 import { FormattedMessage, injectIntl } from 'react-intl'
+import { loginService, logoutService } from '../../services/auth'
 
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
@@ -8,7 +9,6 @@ import React from 'react'
 import { actions } from '../../store/ducks/auth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { loginService } from '../../services/auth'
 import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
 
@@ -142,6 +142,9 @@ const SignInPageWithFormik = withFormik({
           break
         case 'invalid_password':
           setStatus({ password: 'invalid-password' })
+          break
+        case 'invalid_token':
+          logoutService()
           break
         default:
           break

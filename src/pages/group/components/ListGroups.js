@@ -1,3 +1,5 @@
+import React, { useEffect, useRef, useState } from 'react'
+
 import Colors from '../../../assets/styles/Colors'
 import CreateGroupModal from './CreateGroupModal'
 import EditGroupModal from './EditGroupModal'
@@ -8,7 +10,6 @@ import { isEmpty } from 'lodash'
 import styled from 'styled-components'
 import { useGroupsSelector } from '../../../store/ducks/groups'
 import { useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
-import React, { useEffect, useRef, useState } from 'react'
 
 const Container = styled.div`
   display: flex;
