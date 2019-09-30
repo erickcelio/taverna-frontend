@@ -1,14 +1,14 @@
 import { Button, FormBox, FormDiv, Header, HeaderH2 } from './../signIn/styles'
 import { Form, Icon, Input } from 'antd'
 import { FormattedMessage, injectIntl } from 'react-intl'
+import React, { useEffect } from 'react'
+import { logoutService, registerService } from '../../services/auth'
 
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
-import React from 'react'
 import { actions } from '../../store/ducks/auth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { registerService } from '../../services/auth'
 import styled from 'styled-components'
 import styles from '../../assets/styles/'
 import { withFormik } from 'formik'
@@ -19,6 +19,10 @@ const InputStyled = styled(Input)`
 `
 
 const SignUpForm = props => {
+  useEffect(() => {
+    logoutService()
+  }, [])
+
   const {
     values,
     handleChange,
@@ -37,11 +41,13 @@ const SignUpForm = props => {
     password: passwordError,
     repeatPassword: repeatPasswordError
   } = errors
+
   const {
     username: usernameStatus,
     password: passwordStatus,
     email: emailStatus
   } = status
+
   const hasUsernameError = usernameError || usernameStatus ? 'error' : ''
   const hasPasswordError = passwordError || passwordStatus ? 'error' : ''
   const hasEmailError = emailError || emailStatus ? 'error' : ''

@@ -1,11 +1,11 @@
 import { Button, FormBox, FormDiv, Header, HeaderH2, HeaderP } from './styles'
 import { Form, Icon, Input } from 'antd'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import { loginService, logoutService } from '../../services/auth'
+import React, { useEffect } from 'react'
+import { getToken, loginService, logoutService } from '../../services/auth'
 
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
-import React from 'react'
 import { actions } from '../../store/ducks/auth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -23,6 +23,10 @@ const SignInForm = props => {
     status,
     intl: { formatMessage }
   } = props
+
+  useEffect(() => {
+    logoutService()
+  }, [])
 
   const { username: usernameError, password: passwordError } = errors
   const { username: usernameStatus, password: passwordStatus } = status
