@@ -4,8 +4,7 @@ import React, { useState } from 'react'
 
 import PropTypes from 'prop-types'
 import UploadImage from './UploadImage'
-import { actions } from '../../../store/ducks/groups'
-import { createGroupService } from '../../../services/group'
+import { createGroupRequestAction } from '../../../store/groups/actions'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 
@@ -50,17 +49,15 @@ const CreateGroupModal = ({ visible, onClose, intl: { formatMessage } }) => {
   const intlPrefix = 'groups.create-group-modal'
 
   const createGroup = async () => {
-    if (image !== '' && name !== '') {
+    if (name !== '') {
       setLoading(true)
-      try {
-        const group = await createGroupService({ name, image })
-        dispatch(actions.addGroup({ group }))
-        onClose()
-      } catch (e) {
-        console.log('Error =>', e)
-      } finally {
+      dispatch(createGroupRequestAction({ group: { name, image } }, () => {
         setLoading(false)
-      }
+        onClose()
+      }, (error) => {
+        console.log('Error =>', error)
+        setLoading(false)
+      }))
     }
   }
 

@@ -1,12 +1,11 @@
 import { Icon } from 'antd'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { actions } from '../store/ducks/auth'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { authLogoutAction } from '../store/auth/actions'
 import logoImg from '../assets/img/logo.png'
 import pages from '../routes/AppPages'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
 
 const Container = styled.div`
   left: 0;
@@ -70,8 +69,11 @@ const IconContainer = styled.div`
   cursor: pointer;
 `
 
-const SideBar = ({ logout, history }) => {
+const SideBar = ({ history }) => {
   const { pathname: path } = history.location
+
+  const dispatch = useDispatch()
+
   const renderMenuIcons = items => {
     return items.map(item => (
       <IconContainer
@@ -91,7 +93,7 @@ const SideBar = ({ logout, history }) => {
       </LogoContainer>
       <MenuContainer>{renderMenuIcons(pages)}</MenuContainer>
       <LogOutContainer>
-        <IconContainer onClick={logout}>
+        <IconContainer onClick={() => dispatch(authLogoutAction())}>
           <Icon style={{ color: 'white', fontSize: '25px' }} type='logout' />
         </IconContainer>
       </LogOutContainer>
@@ -100,19 +102,7 @@ const SideBar = ({ logout, history }) => {
 }
 
 SideBar.propTypes = {
-  logout: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      logout: actions.logout
-    },
-    dispatch
-  )
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SideBar)
+export default SideBar

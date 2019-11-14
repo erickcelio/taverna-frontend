@@ -1,8 +1,9 @@
 import React from 'react'
-import { useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
+import { selectedGroupSelector } from '../../../store/selected-group/selectors'
+import { useSelector } from 'react-redux'
 
 const GroupInfo = () => {
-  const group = useSelectedGroupSelector()
+  const group = useSelector(selectedGroupSelector)
   return <div style={{ flex: 1 }}>{group.name}</div>
 }
 

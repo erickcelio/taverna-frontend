@@ -6,10 +6,11 @@ import EditGroupModal from './EditGroupModal'
 import GroupMenu from './GroupMenu'
 import { Icon } from 'antd'
 import Slider from 'react-slick'
+import { groupsSelector } from '../../../store/groups/selectors'
 import { isEmpty } from 'lodash'
+import { selectedGroupSelector } from '../../../store/selected-group/selectors'
 import styled from 'styled-components'
-import { useGroupsSelector } from '../../../store/ducks/groups'
-import { useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
+import { useSelector } from 'react-redux'
 
 const Container = styled.div`
   display: flex;
@@ -33,8 +34,8 @@ const ListGroups = () => {
   const [showCreateModal, toggleCreateModal] = useState(false)
   const [selectedGroupEdit, editGroup] = useState({})
 
-  const groups = useGroupsSelector()
-  const selectedGroup = useSelectedGroupSelector()
+  const groups = useSelector(groupsSelector)
+  const selectedGroup = useSelector(selectedGroupSelector)
 
   const selectGroupIndex = groups.findIndex(
     ({ _id }) => selectedGroup._id === _id

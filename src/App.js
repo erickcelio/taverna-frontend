@@ -1,4 +1,6 @@
-import { persistor, store } from './store'
+import './config/reactotron-config'
+
+import store, { persistor } from './store'
 
 import { ApolloProvider } from '@apollo/react-hooks'
 import GraphQLClient from './services/graphql'

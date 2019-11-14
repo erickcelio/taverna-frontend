@@ -4,8 +4,8 @@ import GroupInfo from './components/GroupInfo'
 import ListGroups from './components/ListGroups'
 import SideBarSecondary from './components/SideBarSecondary'
 import UserInfo from './components/UserInfo'
-import { actions } from '../../store/ducks/groups'
 import { getMyGroupsService } from '../../services/group'
+import { setGroupsAction } from '../../store/groups/actions'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 
@@ -21,7 +21,7 @@ const GroupPage = () => {
 
   const getMyGroups = async () => {
     const groups = await getMyGroupsService()
-    dispatch(actions.setGroups({ groups }))
+    dispatch(setGroupsAction({ groups }))
   }
 
   useEffect(() => {

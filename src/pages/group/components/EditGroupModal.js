@@ -1,14 +1,14 @@
 import { Button, Input, Modal } from 'antd'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import React, { useState } from 'react'
-import { selectGroup, useSelectedGroupSelector } from '../../../store/ducks/selectedGroup'
+import { useDispatch, useSelector } from 'react-redux'
 
 import PropTypes from 'prop-types'
 import UploadImage from './UploadImage'
-import { actions } from '../../../store/ducks/groups'
-import { editGroupService } from '../../../services/group'
+import { editGroupRequestAction } from '../../../store/groups/actions'
+import { selectGroupAction } from '../../../store/selected-group/actions'
+import { selectedGroupSelector } from '../../../store/selected-group/selectors'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
 
 const Container = styled.div`
   display: flex;
@@ -42,35 +42,36 @@ const UploadImageContainer = styled.div`
 `
 
 const EditGroupModal = ({ group, visible, onClose, intl: { formatMessage } }) => {
+  const { _id } = group
+
   const [image, changeImage] = useState(group.image)
   const [name, changeName] = useState(group.name)
   const [loading, setLoading] = useState(false)
 
-  const selectedGroup = useSelectedGroupSelector()
+  const selectedGroup = useSelector(selectedGroupSelector)
 
   const dispatch = useDispatch()
 
   const intlPrefix = 'groups.edit-group-modal'
 
   const editGroup = async () => {
-    if (image !== '' && name !== '') {
+    if (name !== '') {
       setLoading(true)
-      const { _id } = group
-      try {
-        const group = await editGroupService({ name, image, _id })
-        dispatch(actions.addGroup({ group }))
-        if (selectedGroup._id === _id) {
-          dispatch(selectGroup({ group }))
-        }
-      } catch (e) {
-        console.log('Error =>', e)
-      } finally {
-        setLoading(false)
-      }
+      dispatch(editGroupRequestAction({ group: { name, image, _id } },
+        () => {
+          if (selectedGroup._id === _id) {
+            dispatch(selectGroupAction({ group }))
+          }
+          setLoading(false)
+          changeImage('')
+          changeName('')
+          onClose()
+        }, (error) => {
+          console.log('Error =>', error)
+          setLoading(false)
+        })
+      )
     }
-    changeImage('')
-    changeName('')
-    onClose()
   }
 
   return (

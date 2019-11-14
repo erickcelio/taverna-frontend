@@ -1,43 +1,69 @@
 import { Button, FormBox, FormDiv, Header, HeaderH2, HeaderP } from './styles'
 import { Form, Icon, Input } from 'antd'
-import { FormattedMessage, injectIntl } from 'react-intl'
-import React, { useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
+import React, { useEffect, useState } from 'react'
 import { loginService, logoutService } from '../../services/auth'
 
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
-import { actions } from '../../store/ducks/auth'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { authLoginAction } from '../../store/auth/actions'
 import styles from '../../assets/styles/'
-import { withFormik } from 'formik'
+import { useDispatch } from 'react-redux'
+
+const intlInputErrorPrefix = 'input.error'
 
 const SignInForm = props => {
-  const {
-    values,
-    handleChange,
-    handleSubmit,
-    history,
-    isSubmitting,
-    errors,
-    status,
-    intl: { formatMessage }
-  } = props
+  const { getFieldDecorator, validateFields, setFields } = props.form
+
+  const { formatMessage } = useIntl()
+  const dispatch = useDispatch()
+
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     logoutService()
   }, [])
 
-  const { username: usernameError, password: passwordError } = errors
-  const { username: usernameStatus, password: passwordStatus } = status
-  const hasUsernameError = usernameError || usernameStatus ? 'error' : ''
-  const hasPasswordError = passwordError || passwordStatus ? 'error' : ''
-  const usernameErrorMessage =
-    hasUsernameError &&
-    formatMessage({ id: `input.error.${usernameStatus || usernameError}` })
-  const passwordErrorMessage =
-    hasPasswordError &&
-    formatMessage({ id: `input.error.${passwordStatus || passwordError}` })
+  const handleSubmit = e => {
+    e.preventDefault()
+    validateFields(async (err, values) => {
+      if (!err) {
+        setSubmitting(true)
+        try {
+          dispatch(authLoginAction(await loginService(values)))
+          props.history.push('/home')
+        } catch (e) {
+          const error = e.message
+          switch (error) {
+            case 'user_not_found':
+              setFields({
+                username: {
+                  value: values.username,
+                  errors: [new Error(formatMessage({ id: `${intlInputErrorPrefix}.invalid-username` }))]
+                }
+              })
+              break
+            case 'invalid_password':
+              setFields({
+                password: {
+                  value: values.password,
+                  errors: [new Error(formatMessage({ id: `${intlInputErrorPrefix}.invalid-password` }))]
+                }
+              })
+              break
+            case 'invalid_token':
+              logoutService()
+              break
+            default:
+              break
+          }
+          setSubmitting(false)
+        }
+      }
+    })
+  }
+
+  const inputRequiredMessage = formatMessage({ id: `${intlInputErrorPrefix}.required` })
 
   return (
     <FormBox onSubmit={handleSubmit}>
@@ -49,50 +75,51 @@ const SignInForm = props => {
           </HeaderP>
         </Header>
         <div style={{ width: '280px' }}>
-          <Form.Item
-            validateStatus={hasUsernameError}
-            help={hasUsernameError && usernameErrorMessage}
-          >
-            <Input
-              style={{ height: '48px' }}
-              prefix={<Icon type="user" />}
-              placeholder={formatMessage({ id: 'login.input.username' })}
-              type="text"
-              name="username"
-              onChange={handleChange}
-              value={values.username}
-            />
+          <Form.Item>
+            {getFieldDecorator('username', {
+              rules: [
+                { required: true, message: inputRequiredMessage }
+              ]
+            })(
+              <Input
+                style={{ height: '48px' }}
+                prefix={<Icon type="user" />}
+                placeholder={formatMessage({ id: 'login.input.username' })}
+                type="text"
+                name="username"
+              />
+            )}
           </Form.Item>
-          <Form.Item
-            validateStatus={hasPasswordError}
-            help={hasPasswordError && passwordErrorMessage}
-          >
-            <Input
-              style={{ height: '48px' }}
-              prefix={<Icon type="lock" />}
-              placeholder={formatMessage({ id: 'login.input.password' })}
-              type="password"
-              name="password"
-              onChange={handleChange}
-              value={values.password}
-            />
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [
+                { required: true, message: inputRequiredMessage }
+              ]
+            })(
+              <Input
+                style={{ height: '48px' }}
+                prefix={<Icon type="lock" />}
+                placeholder={formatMessage({ id: 'login.input.password' })}
+                type="password"
+              />
+            )}
           </Form.Item>
         </div>
         <ButtonComponent
           style={{ backgroundColor: styles.colors.purple }}
           onClick={handleSubmit}
-          loading={isSubmitting}
+          loading={submitting}
           loadingColor={'white'}
           type="submit"
           message={'login.button.login'}
         />
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Button onClick={() => history.push('/recovery')} pass>
+          <Button onClick={() => props.history.push('/recovery')} pass>
             <FormattedMessage id={'login.button.forgot-password'} />
           </Button>
           <ButtonComponent
             style={{ backgroundColor: 'white', color: 'black', maxWidth: 160 }}
-            onClick={() => history.push('/register')}
+            onClick={() => props.history.push('/register')}
             message="login.button.sign-up"
           />
         </div>
@@ -102,73 +129,10 @@ const SignInForm = props => {
 }
 
 SignInForm.propTypes = {
-  isSubmitting: PropTypes.bool.isRequired,
-  errors: PropTypes.object.isRequired,
-  intl: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired,
-  status: PropTypes.object
+  form: PropTypes.object.isRequired
 }
 
-SignInForm.defaultProps = {
-  status: {}
-}
+const WrappedLoginForm = Form.create({ name: 'login_form' })(SignInForm)
 
-const SignInPageWithFormik = withFormik({
-  validateOnBlur: false,
-  validateOnChange: false,
-  mapPropsToValues: () => ({ username: '', password: '' }),
-  validate: values => {
-    const errors = {}
-
-    if (!values.username) {
-      errors.username = 'required'
-    }
-
-    if (!values.password) {
-      errors.password = 'required'
-    }
-
-    return errors
-  },
-
-  handleSubmit: async (values, { props, setStatus, setSubmitting }) => {
-    try {
-      props.login(await loginService(values))
-      props.history.push('/home')
-    } catch (e) {
-      const error = e.message
-      switch (error) {
-        case 'user_not_found':
-          setStatus({ username: 'invalid-username' })
-          break
-        case 'invalid_password':
-          setStatus({ password: 'invalid-password' })
-          break
-        case 'invalid_token':
-          logoutService()
-          break
-        default:
-          break
-      }
-      setSubmitting(false)
-    }
-  }
-})(SignInForm)
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      login: actions.login
-    },
-    dispatch
-  )
-
-export default injectIntl(
-  connect(
-    null,
-    mapDispatchToProps
-  )(SignInPageWithFormik)
-)
+export default WrappedLoginForm

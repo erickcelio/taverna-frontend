@@ -6,7 +6,7 @@ import { logoutService, registerService } from '../../services/auth'
 
 import ButtonComponent from '../../components/ButtonComponent'
 import PropTypes from 'prop-types'
-import { actions } from '../../store/ducks/auth'
+import { authLoginAction } from '../../store/auth/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -238,7 +238,7 @@ const SignUpPageWithFormik = withFormik({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      login: actions.login
+      login: authLoginAction
     },
     dispatch
   )

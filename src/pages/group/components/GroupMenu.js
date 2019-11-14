@@ -4,8 +4,8 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { deleteGroupService } from '../../../services/group'
-import { removeGroupAction } from '../../../store/ducks/groups'
-import { selectGroup } from '../../../store/ducks/selectedGroup'
+import { removeGroupAction } from '../../../store/groups/actions'
+import { selectGroupAction } from '../../../store/selected-group/actions'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 
@@ -62,7 +62,7 @@ const GroupMenu = ({ active, onEdit, group, intl: { formatMessage } }) => {
       <Tooltip title={group.name} placement="bottom">
         <AvatarStyled
           active={active ? 1 : 0}
-          onClick={() => dispatch(selectGroup({ group }))}
+          onClick={() => dispatch(selectGroupAction({ group }))}
           shape="square"
           size={64}
           src={group.image}
